@@ -3,6 +3,9 @@ package vn.myclass.controller.admin;
 import org.apache.log4j.Logger;
 import vn.myclass.command.UserCommand;
 import vn.myclass.core.dto.UserDTO;
+import vn.myclass.core.service.UserService;
+import vn.myclass.core.service.impl.UserServiceImpl;
+import vn.myclass.core.web.common.WebConstant;
 import vn.myclass.core.web.utils.FormUtil;
 
 import javax.servlet.RequestDispatcher;
@@ -23,8 +26,25 @@ public class LoginController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        /*UserCommand command = FormUtil.populate(UserCommand.class, request);
-        UserDTO pojo = command.getPojo();*/
+        UserCommand command = FormUtil.populate(UserCommand.class, request);
+        UserDTO pojo = command.getPojo();
+        UserService userService = new UserServiceImpl();
+        try{
+            if(userService.isUserExist(pojo) != null){
+                if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_ADMIN)) {
+                    request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
+                    request.setAttribute(WebConstant.MESSAGE_RESPONSE, "ADMIN");
+                } else if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_USER)) {
+                    request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
+                    request.setAttribute(WebConstant.MESSAGE_RESPONSE, "USER");
+                }
+            }
+        } catch (NullPointerException e){
+            log.error(e.getMessage(), e);
+            request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_ERROR);
+            request.setAttribute(WebConstant.MESSAGE_RESPONSE, "Tên hoặc mật khẩu sai");
+        }
+
         RequestDispatcher rd = request.getRequestDispatcher("/views/web/login.jsp");
         rd.forward(request, response);
     }
