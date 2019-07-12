@@ -1,26 +1,20 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CACLV
-  Date: 7/10/2019
-  Time: 11:36 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %>
 <html>
 <head>
     <title><dec:title default="Login Page"/></title>
     <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="<c:url value='/template/admin/css/bootstrap.min.css' />"/>
-    <link rel="stylesheet" href="<c:url value='/template/admin/font-awesome/4.2.0/css/font-awesome.min.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/bootstrap.min.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/font-awesome/4.2.0/css/font-awesome.min.css' />"/>
     <!-- page specific plugin styles -->
     <!-- text fonts -->
-    <link rel="stylesheet" href="<c:url value='/template/admin/fonts/fonts.googleapis.com.css' />"/>
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/fonts/fonts.googleapis.com.css' />"/>
     <!-- ace styles -->
-    <link rel="stylesheet" href="<c:url value='/template/admin/css/ace.min.css' />" class="ace-main-stylesheet"
+    <link rel="stylesheet" href="<c:url value='/template/admin/assets/css/ace.min.css' />" class="ace-main-stylesheet"
           id="main-ace-style"/>
     <!-- ace settings handler -->
-    <script src="<c:url value='/template/admin/js/ace-extra.min.js' />"></script>
+    <script src="<c:url value='/template/admin/assets/js/ace-extra.min.js' />"></script>
     <dec:head/>
 </head>
 <body class="login-layout">
@@ -58,7 +52,7 @@
 
 
 <!-- ace scripts -->
-<script src="<c:url value='/template/admin/js/jquery.2.1.1.min.js' />"></script>
+<script src="<c:url value='/template/admin/assets/js/jquery.2.1.1.min.js' />"></script>
 
     <script type="text/javascript">
         jQuery(function($) {
