@@ -11,7 +11,7 @@ public class UserTest {
     @Test
     public void checkIsUserExist(){
         UserDao userDao = new UserDaoImpl();
-        UserEntity entity = userDao.isUserExist("duykypaul", "123456");
+        UserEntity entity = userDao.findUserByUsernameAndPassword("duykypaul", "123456");
         if(entity != null){
             log.error("success");
         } else {
@@ -22,7 +22,7 @@ public class UserTest {
     @Test
     public void checkFindRoleByUser(){
         UserDao userDao = new UserDaoImpl();
-        UserEntity entity = userDao.findRoleByUser("duykypaul", "123456");
+        UserEntity entity = userDao.findUserByUsernameAndPassword("duykypaul", "123456");
         log.error(entity.getRoleEntity().getRoleId() + "-" + entity.getRoleEntity().getName());
     }
 }

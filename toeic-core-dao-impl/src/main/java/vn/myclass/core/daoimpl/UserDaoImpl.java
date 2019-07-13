@@ -10,7 +10,8 @@ import vn.myclass.core.data.daoimpl.AbstractDao;
 import vn.myclass.core.persistence.entity.UserEntity;
 
 public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements UserDao {
-    public UserEntity isUserExist(String name, String password) {
+
+    public UserEntity findUserByUsernameAndPassword(String name, String password) {
         UserEntity entity = new UserEntity();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -31,9 +32,5 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
             session.close();
         }
         return entity;
-    }
-
-    public UserEntity findRoleByUser(String name, String password) {
-        return isUserExist(name, password);
     }
 }

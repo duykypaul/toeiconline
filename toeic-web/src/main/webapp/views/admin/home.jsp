@@ -6,7 +6,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <%--<title><fmt:message key="label.home" bundle="${lang}"/></title>--%>
+    <title><fmt:message key="label.home" bundle="${lang}"/></title>
 </head>
 <body>
 <div class="main-content">
@@ -15,7 +15,7 @@
             <ul class="breadcrumb">
                 <li>
                     <i class="ace-icon fa fa-home home-icon"></i>
-                    <%--<a href="admin.html"><fmt:message key="label.home" bundle="${lang}"/></a>--%>
+                    <a href="admin.html"><fmt:message key="label.home" bundle="${lang}"/></a>
                 </li>
             </ul><!-- /.breadcrumb -->
         </div>

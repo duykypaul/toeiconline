@@ -32,20 +32,17 @@ public class LoginController extends HttpServlet {
         try{
             if(userService.isUserExist(pojo) != null){
                 if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_ADMIN)) {
-                    request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
-                    request.setAttribute(WebConstant.MESSAGE_RESPONSE, "ADMIN");
+                    response.sendRedirect("/admin-home.html");
                 } else if(userService.findRoleByUser(pojo).getRoleDTO().getName().equals(WebConstant.ROLE_USER)) {
-                    request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_SUCCESS);
-                    request.setAttribute(WebConstant.MESSAGE_RESPONSE, "USER");
+                    response.sendRedirect("/home.html");
                 }
             }
         } catch (NullPointerException e){
             log.error(e.getMessage(), e);
             request.setAttribute(WebConstant.ALERT, WebConstant.TYPE_ERROR);
             request.setAttribute(WebConstant.MESSAGE_RESPONSE, "Tên hoặc mật khẩu sai");
+            RequestDispatcher rd = request.getRequestDispatcher("/views/web/login.jsp");
+            rd.forward(request, response);
         }
-
-        RequestDispatcher rd = request.getRequestDispatcher("/views/web/login.jsp");
-        rd.forward(request, response);
     }
 }
