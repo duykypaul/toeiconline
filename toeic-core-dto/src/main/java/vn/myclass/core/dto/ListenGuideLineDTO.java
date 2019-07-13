@@ -3,7 +3,7 @@ package vn.myclass.core.dto;
 import java.io.Serializable;
 import java.sql.Timestamp;
 
-public class ListenguideLineDTO implements Serializable {
+public class ListenGuideLineDTO implements Serializable {
     private Integer listenGuideLineId;
     private String title;
     private String image;

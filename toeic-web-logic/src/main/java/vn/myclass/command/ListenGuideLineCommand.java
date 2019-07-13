@@ -1,10 +1,10 @@
 package vn.myclass.command;
 
-import vn.myclass.core.dto.ListenguideLineDTO;
+import vn.myclass.core.dto.ListenGuideLineDTO;
 import vn.myclass.core.web.command.AbstractCommand;
 
-public class ListenGuideLineCommand extends AbstractCommand<ListenguideLineDTO> {
+public class ListenGuideLineCommand extends AbstractCommand<ListenGuideLineDTO> {
     public ListenGuideLineCommand(){
-        this.pojo = new ListenguideLineDTO();
+        this.pojo = new ListenGuideLineDTO();
     }
 }

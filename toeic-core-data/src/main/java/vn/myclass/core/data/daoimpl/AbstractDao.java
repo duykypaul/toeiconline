@@ -95,7 +95,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
         return result;
     }
 
-    public Object[] findByProperty(String property, Object value, String sortField, String sortType, Integer offset, Integer limit) {
+    public Object[] findByProperty(String property, Object value, String sortExpression, String sortDirection, Integer offset, Integer limit) {
         List<T> list = new ArrayList<T>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
@@ -106,9 +106,9 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             if(property != null && value != null) {
                 sql.append(" where ").append(property).append("= :value");
             }
-            if(sortField != null && sortType != null) {
-                sql.append(" order by ").append(sortField);
-                sql.append(" " + (sortType.equals(CoreConstant.SORT_ASC)? "asc" : "desc"));
+            if(sortExpression != null && sortDirection != null) {
+                sql.append(" order by ").append(sortExpression);
+                sql.append(" " + (sortDirection.equals(CoreConstant.SORT_ASC)? "asc" : "desc"));
             }
             Query query1 = session.createQuery(sql.toString());
             if(value != null) {

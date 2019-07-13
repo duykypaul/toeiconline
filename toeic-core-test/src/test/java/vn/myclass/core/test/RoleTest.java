@@ -43,11 +43,11 @@ public class RoleTest {
         RoleDao roleDao = new RoleDaoImpl();
         String property = null;
         Object value = null;
-        String sortField = null;
-        String sortType = null;
+        String sortExpression = null;
+        String sortDirection = null;
         Integer offset = null;
         Integer limit = null;
-        Object[] objects = roleDao.findByProperty(property, value, sortField, sortType, offset, limit);
+        Object[] objects = roleDao.findByProperty(property, value, sortExpression, sortDirection, offset, limit);
     }
 
     @Test

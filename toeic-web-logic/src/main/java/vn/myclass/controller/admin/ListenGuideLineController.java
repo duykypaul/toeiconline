@@ -1,8 +1,11 @@
 package vn.myclass.controller.admin;
 
 import vn.myclass.command.ListenGuideLineCommand;
-import vn.myclass.core.dto.ListenguideLineDTO;
+import vn.myclass.core.dto.ListenGuideLineDTO;
+import vn.myclass.core.service.ListenGuideLineService;
+import vn.myclass.core.service.impl.ListenGuideLineServiceImpl;
 import vn.myclass.core.web.common.WebConstant;
+import vn.myclass.core.web.utils.RequestUtil;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,24 +19,15 @@ import java.util.List;
 
 @WebServlet("/admin-guideline-listen-list.html")
 public class ListenGuideLineController extends HttpServlet {
+    private ListenGuideLineService listenGuideLineService = new ListenGuideLineServiceImpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<ListenguideLineDTO> listenguideLineDTOS = new ArrayList<ListenguideLineDTO>();
         ListenGuideLineCommand command = new ListenGuideLineCommand();
-
-        ListenguideLineDTO dto1 = new ListenguideLineDTO();
-        dto1.setTitle("bai 1");
-        dto1.setContent("content 1");
-        ListenguideLineDTO dto2 = new ListenguideLineDTO();
-        dto2.setTitle("bai 2");
-        dto2.setContent("content 2");
-
-        listenguideLineDTOS.add(dto1);
-        listenguideLineDTOS.add(dto2);
-
-        command.setListResult(listenguideLineDTOS);
-        command.setMaxPageItems(1);
-        command.setTotalItems(listenguideLineDTOS.size());
-
+        command.setMaxPageItems(20);
+        RequestUtil.initSearchBean(request, command);
+        Object[] objects = listenGuideLineService.findListenGuideLineByProperties(null, null,
+                command.getSortExpression(), command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
+        command.setListResult((List<ListenGuideLineDTO>) objects[1]);
+        command.setTotalItems(Integer.parseInt(objects[0].toString()) );
         request.setAttribute(WebConstant.LIST_ITEMS, command);
         RequestDispatcher rd = request.getRequestDispatcher("/views/admin/listenguideline/list.jsp");
         rd.forward(request, response);
