@@ -23,7 +23,6 @@ public class ListenGuideLineBeanUtil {
         entity.setImage(dto.getImage());
         entity.setCreatedDate(dto.getCreatedDate());
         entity.setModifiedDate(dto.getModifiedDate());
-
         return entity;
     }
 
