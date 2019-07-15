@@ -21,14 +21,14 @@ import java.util.List;
 public class ListenGuideLineController extends HttpServlet {
     private ListenGuideLineService listenGuideLineService = new ListenGuideLineServiceImpl();
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        ListenGuideLineCommand command = new ListenGuideLineCommand();
+        /*ListenGuideLineCommand command = new ListenGuideLineCommand();
         command.setMaxPageItems(20);
         RequestUtil.initSearchBean(request, command);
         Object[] objects = listenGuideLineService.findListenGuideLineByProperties(null, null,
                 command.getSortExpression(), command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
         command.setListResult((List<ListenGuideLineDTO>) objects[1]);
         command.setTotalItems(Integer.parseInt(objects[0].toString()) );
-        request.setAttribute(WebConstant.LIST_ITEMS, command);
+        request.setAttribute(WebConstant.LIST_ITEMS, command);*/
         RequestDispatcher rd = request.getRequestDispatcher("/views/admin/listenguideline/list.jsp");
         rd.forward(request, response);
     }

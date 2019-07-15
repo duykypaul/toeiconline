@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T> {
     private Class<T> persistenceClass;
@@ -95,24 +96,37 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
         return result;
     }
 
-    public Object[] findByProperty(String property, Object value, String sortExpression, String sortDirection, Integer offset, Integer limit) {
+    public Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
         List<T> list = new ArrayList<T>();
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Object totalItems = 0;
+        String params[] = new String[property.size()];
+        Object values[] = new Object[property.size()];
+        int index = 0;
+        for(Map.Entry item : property.entrySet()){
+            params[index] = (String) item.getKey();
+            values[index] = item.getValue();
+            index++;
+        }
         try{
             StringBuilder sql = new StringBuilder("from ");
             sql.append(this.getPersistenceClassName());
-            if(property != null && value != null) {
-                sql.append(" where ").append(property).append("= :value");
+
+            if(property.size() > 0) {
+                for(int i = 0; i < params.length; i++){
+                    sql.append((i == 0) ? " where " : " and ").append(params[i]).append("= :" + params[i] + "");
+                }
             }
             if(sortExpression != null && sortDirection != null) {
                 sql.append(" order by ").append(sortExpression);
                 sql.append(" " + (sortDirection.equals(CoreConstant.SORT_ASC)? "asc" : "desc"));
             }
             Query query1 = session.createQuery(sql.toString());
-            if(value != null) {
-                query1.setParameter("value", value);
+            if(property.size() > 0) {
+                for(int i = 0; i < params.length; i++){
+                    query1.setParameter(params[i], values[i]);
+                }
             }
             if(offset != null && offset >= 0){
                 query1.setFirstResult(offset);
@@ -124,13 +138,17 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
 
             StringBuilder sql2 = new StringBuilder("select count(*) from ");
             sql2.append(this.getPersistenceClassName());
-            if(property != null && value != null) {
-                sql2.append(" where ").append(property).append("= :value");
+            if(property.size() > 0) {
+                for(int i = 0; i < params.length; i++){
+                    sql2.append((i == 0) ? " where " : " and ").append(params[i]).append("= :" + params[i] + "");
+                }
             }
 
             Query query2 = session.createQuery(sql2.toString());
-            if(value != null) {
-                query2.setParameter("value", value);
+            if(property.size() > 0) {
+                for(int i = 0; i < params.length; i++){
+                    query2.setParameter(params[i], values[i]);
+                }
             }
             totalItems = query2.list().get(0);
             transaction.commit();
