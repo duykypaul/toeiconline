@@ -7,8 +7,9 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:url var="requestUrl" value="/admin-guideline-listen-list.html">
-
+<c:url var="requestUrl" value="/admin-guideline-listen-list.html" />
+<c:url value="/admin-guideline-listen-edit.html" var="listenGuideLineEditUrl">
+    <c:param name="urlType" value="url_edit"/>
 </c:url>
 <html>
 <head>
@@ -33,10 +34,20 @@
         <div class="page-content">
             <div class="row">
                 <div class="col-xs-12">
+                    <a type="button" href="${listenGuideLineEditUrl}">Thêm bài hd nghe</a>
+                    <c:if test="${not empty messageResponse}">
+                        <div class="alert alert-block alert-${alert}">
+                            <button type="button" class="close" data-dismiss="alert">
+                                <i class="ace-icon fa fa-times"></i>
+                            </button>
+                                ${messageResponse}
+                        </div>
+                    </c:if>
+
                     <div class="table-responsive">
                         <fmt:bundle basename="ApplicationResources">
                             <display:table id="tableList" name="items.listResult" partialList="true" size="${items.totalItems}"
-                                           pagesize="${items.maxPageItems}" sort="external" requestURI=""
+                                           pagesize="${items.maxPageItems}" sort="external" requestURI="${requestUrl}"
                                            class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
                                            style="margin: 3em 0 1.5em;">
                                 <display:column property="title" titleKey="label.guideline.listen.title" sortable="true" sortName="title"/>

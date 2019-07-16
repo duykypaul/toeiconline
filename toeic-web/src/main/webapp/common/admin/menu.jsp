@@ -1,9 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%@include file="/common/taglib.jsp"%>
-<%--<c:url value="/admin-guideline-listen-list.html" var="listenGuidelineListUrl">--%>
-<%--&lt;%&ndash;    <c:param name="urlType" value="url_list"/>&ndash;%&gt;--%>
-<%--</c:url>--%>
+<c:url value="/admin-guideline-listen-list.html" var="listenGuideLineListUrl">
+    <c:param name="urlType" value="url_list"/>
+</c:url>
 <%--<c:url value="/admin-user-list.html" var="userListUrl">
     <c:param name="urlType" value="url_list"/>
 </c:url>--%>
@@ -45,7 +45,7 @@
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
-                    <a href="<c:url value="/admin-guideline-listen-list.html"/>">
+                    <a href="${listenGuideLineListUrl}">
                         <i class="menu-icon fa fa-caret-right"></i>
                         <fmt:message key="label.guideline.listen.list" bundle="${lang}"/>
                     </a>
@@ -53,11 +53,11 @@
                 </li>
             </ul>
         </li>
-        <li class="">
+        <%--<li class="">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-<%--                <fmt:message key="label.dashboard" bundle="${lang}"/>--%>
+                <fmt:message key="label.dashboard" bundle="${lang}"/>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
@@ -65,31 +65,31 @@
                 <li class="">
                     <a href="${userListUrl}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <%--<fmt:message key="label.user.management" bundle="${lang}"/>--%>
+                        <fmt:message key="label.user.management" bundle="${lang}"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
-        </li>
-        <li class="">
+        </li>--%>
+        <%--<li class="">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                <%--<fmt:message key="lable.exercise.management" bundle="${lang}"/>--%>
+                &lt;%&ndash;<fmt:message key="lable.exercise.management" bundle="${lang}"/>&ndash;%&gt;
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
             <ul class="submenu">
                 <li class="">
                     <a href="
-						<%--<c:url value="/admin-exericse-upload.html"/>">--%>
+						&lt;%&ndash;<c:url value="/admin-exericse-upload.html"/>">&ndash;%&gt;
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <%--<fmt:message key="label.exercise.audio.image.upload" bundle="${lang}"/>--%>
+                        &lt;%&ndash;<fmt:message key="label.exercise.audio.image.upload" bundle="${lang}"/>&ndash;%&gt;
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
-        </li>
+        </li>--%>
     </ul>
     <div class="sidebar-toggle sidebar-collapse">
         <i class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>

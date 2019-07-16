@@ -10,7 +10,7 @@
 <%@include file="/common/taglib.jsp"%>
 <html>
 <head>
-    <title><fmt:message key="label.web.home" bundle="${lang}"/> </title>
+    <title><fmt:message key="label.home" bundle="${lang}"/> </title>
     <!-- Bootstrap -->
     <link href="<c:url value="/template/web/css/bootstrap.css" />" rel="stylesheet">
     <link href="<c:url value="/template/web/css/bootstrap-responsive.css" />" rel="stylesheet">
