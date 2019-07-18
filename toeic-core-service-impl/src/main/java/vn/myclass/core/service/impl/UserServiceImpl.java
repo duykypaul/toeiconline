@@ -23,6 +23,13 @@ public class UserServiceImpl implements UserService {
         return UserBeanUtil.entity2Dto(entity);
     }
 
+    public UserDTO findUserById(Integer userId) {
+        UserEntity entity = userDao.findById(userId);
+        UserDTO dto = UserBeanUtil.entity2Dto(entity);
+        return dto;
+
+    }
+
     public Object[] findUserByProperties(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
         List<UserDTO> result = new ArrayList<UserDTO>();
         Object[] objects = userDao.findByProperty( property, sortExpression, sortDirection, offset, limit);

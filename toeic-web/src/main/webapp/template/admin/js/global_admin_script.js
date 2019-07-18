@@ -1,3 +1,5 @@
+/*lưu ý khi sử dụng*/
+
 $(document).ready(function () {
     bindEventCheckAllCheckBox('checkAll');
     enableOrDisableDeleteAll();
