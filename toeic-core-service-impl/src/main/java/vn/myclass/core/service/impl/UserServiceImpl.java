@@ -7,17 +7,29 @@ import vn.myclass.core.persistence.entity.UserEntity;
 import vn.myclass.core.service.UserService;
 import vn.myclass.core.utils.UserBeanUtil;
 
-public class UserServiceImpl implements UserService {
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
+public class UserServiceImpl implements UserService {
+    UserDao userDao = new UserDaoImpl();
     public UserDTO isUserExist(UserDTO dto) {
-        UserDao userDao = new UserDaoImpl();
         UserEntity entity = userDao.findUserByUsernameAndPassword(dto.getName(), dto.getPassword());
         return UserBeanUtil.entity2Dto(entity);
     }
 
     public UserDTO findRoleByUser(UserDTO dto) {
-        UserDao userDao = new UserDaoImpl();
         UserEntity entity = userDao.findUserByUsernameAndPassword(dto.getName(), dto.getPassword());
         return UserBeanUtil.entity2Dto(entity);
+    }
+
+    public Object[] findUserByProperties(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
+        List<UserDTO> result = new ArrayList<UserDTO>();
+        Object[] objects = userDao.findByProperty( property, sortExpression, sortDirection, offset, limit);
+        for(UserEntity item: (List<UserEntity>)objects[1]){
+            result.add(UserBeanUtil.entity2Dto(item));
+        }
+        objects[1] = result;
+        return objects;
     }
 }

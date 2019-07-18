@@ -4,9 +4,9 @@
 <c:url value="/admin-guideline-listen-list.html" var="listenGuideLineListUrl">
     <c:param name="urlType" value="url_list"/>
 </c:url>
-<%--<c:url value="/admin-user-list.html" var="userListUrl">
+<c:url value="/admin-user-list.html" var="userListUrl">
     <c:param name="urlType" value="url_list"/>
-</c:url>--%>
+</c:url>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <div id="sidebar" class="sidebar                  responsive                    ace-save-state">
     <script type="text/javascript">
@@ -53,11 +53,11 @@
                 </li>
             </ul>
         </li>
-        <%--<li class="">
+        <li class="">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                <fmt:message key="label.dashboard" bundle="${lang}"/>
+                <fmt:message key="label.user.management" bundle="${lang}"/>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
@@ -65,12 +65,12 @@
                 <li class="">
                     <a href="${userListUrl}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="label.user.management" bundle="${lang}"/>
+                        <fmt:message key="label.user.list" bundle="${lang}"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
             </ul>
-        </li>--%>
+        </li>
         <%--<li class="">
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
