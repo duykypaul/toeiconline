@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: CACLV
-  Date: 7/18/2019
-  Time: 8:52 AM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@include file="/common/taglib.jsp" %><html>
 <head>
@@ -47,17 +40,13 @@
                                                     <i class="fa fa-plus-circle bigger-110 purple"></i>
                                                 </span>
                                         </a>
-                                        <%--<button type="button" class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" id="deleteAll" disabled
+                                        <button type="button" class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" id="deleteAll" disabled
                                                 data-toggle="tooltip" title="<fmt:message key='label.delete.all' bundle='${lang}'/>">
                                                  <span>
                                                     <i class="fa fa-trash-o bigger-110 pink"></i>
                                                 </span>
-                                        </button>--%>
-                                        <a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" >
-                                                <span>
-                                                    <i class="fa fa-file" aria-hidden="true"></i>
-                                                </span>
-                                        </a>
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -69,6 +58,13 @@
                                            pagesize="${items.maxPageItems}" sort="external" requestURI="${requestUrl}"
                                            class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
                                            style="margin: 3em 0 1.5em;">
+                                <display:column title="<fieldset class='form-group'>
+												        <input type='checkbox' id='checkAll' class='check-box-element'>
+												        </fieldset>" class="center select-cell" headerClass="center select-cell">
+                                    <fieldset>
+                                        <input type="checkbox" name="checkList" id="checkbox_${tableList.userId}" value="${tableList.userId}" class="check-box-element"/>
+                                    </fieldset>
+                                </display:column>
                                 <display:column property="name" titleKey="label.user.name" sortable="true" sortName="name"/>
                                 <display:column property="fullName" titleKey="label.user.fullName" sortable="true" sortName="fullName" />
                             </display:table>
