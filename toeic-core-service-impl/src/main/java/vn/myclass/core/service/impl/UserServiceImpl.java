@@ -7,6 +7,7 @@ import vn.myclass.core.persistence.entity.UserEntity;
 import vn.myclass.core.service.UserService;
 import vn.myclass.core.utils.UserBeanUtil;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -38,5 +39,18 @@ public class UserServiceImpl implements UserService {
         }
         objects[1] = result;
         return objects;
+    }
+
+    public void saveUser(UserDTO dto) {
+        UserEntity entity = UserBeanUtil.dto2Entity(dto);
+        entity.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        userDao.save(entity);
+    }
+
+    public UserDTO updateUser(UserDTO dto) {
+        UserEntity entity = UserBeanUtil.dto2Entity(dto);
+        entity = userDao.update(entity);
+        dto = UserBeanUtil.entity2Dto(entity);
+        return dto;
     }
 }

@@ -7,16 +7,25 @@ import vn.myclass.core.web.command.AbstractCommand;
 import java.util.List;
 
 public class UserCommand extends AbstractCommand<UserDTO> {
-    private List<RoleDTO> roleDTOS;
+
     public UserCommand(){
         this.pojo = new UserDTO();
     }
-
+    private Integer roleId;
+    private List<RoleDTO> roleDTOS;
     public List<RoleDTO> getRoleDTOS() {
         return roleDTOS;
     }
 
     public void setRoleDTOS(List<RoleDTO> roleDTOS) {
         this.roleDTOS = roleDTOS;
+    }
+
+    public Integer getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Integer roleId) {
+        this.roleId = roleId;
     }
 }
