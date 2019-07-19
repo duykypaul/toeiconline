@@ -57,7 +57,7 @@
             <a href="#" class="dropdown-toggle">
                 <i class="menu-icon fa fa-list"></i>
                 <span class="menu-text"></span>
-                <fmt:message key="label.user.management" bundle="${lang}"/>
+                <fmt:message key="label.dasboard" bundle="${lang}"/>
                 <b class="arrow fa fa-angle-down"></b>
             </a>
             <b class="arrow"></b>
@@ -65,7 +65,7 @@
                 <li class="">
                     <a href="${userListUrl}">
                         <i class="menu-icon fa fa-caret-right"></i>
-                        <fmt:message key="label.user.list" bundle="${lang}"/>
+                        <fmt:message key="label.user.management" bundle="${lang}"/>
                     </a>
                     <b class="arrow"></b>
                 </li>
