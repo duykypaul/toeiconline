@@ -1,7 +1,6 @@
 package vn.myclass.core.service.impl;
 
-import vn.myclass.core.dao.UserDao;
-import vn.myclass.core.daoimpl.UserDaoImpl;
+import vn.myclass.core.dto.CheckLoginDTO;
 import vn.myclass.core.dto.UserDTO;
 import vn.myclass.core.persistence.entity.UserEntity;
 import vn.myclass.core.service.UserService;
@@ -14,14 +13,16 @@ import java.util.List;
 import java.util.Map;
 
 public class UserServiceImpl implements UserService {
-    public UserDTO isUserExist(UserDTO dto) {
-        UserEntity entity = SingletonDaoUtil.getUserDaoInstance().findUserByUsernameAndPassword(dto.getName(), dto.getPassword());
-        return UserBeanUtil.entity2Dto(entity);
-    }
-
-    public UserDTO findRoleByUser(UserDTO dto) {
-        UserEntity entity = SingletonDaoUtil.getUserDaoInstance().findUserByUsernameAndPassword(dto.getName(), dto.getPassword());
-        return UserBeanUtil.entity2Dto(entity);
+    public CheckLoginDTO checkLogin(String name, String password) {
+        CheckLoginDTO checkLoginDTO = new CheckLoginDTO();
+        if(name != null && password != null){
+            Object[] objects = SingletonDaoUtil.getUserDaoInstance().checkLogin(name, password);
+            checkLoginDTO.setUserExist((Boolean) objects[0]);
+            if(checkLoginDTO.isUserExist()){
+                checkLoginDTO.setRoleName(objects[1].toString());
+            }
+        }
+        return checkLoginDTO;
     }
 
     public UserDTO findUserById(Integer userId) {
