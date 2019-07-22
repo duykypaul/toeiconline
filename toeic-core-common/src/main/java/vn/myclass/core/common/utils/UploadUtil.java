@@ -5,6 +5,7 @@ import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -15,13 +16,14 @@ import java.util.Map;
 import java.util.Set;
 
 public class UploadUtil {
+    private final Logger log = Logger.getLogger(this.getClass());
     private final int maxMemorySize = 1024 *1024 * 3; /* 3MB */
     private final int maxRequestSize = 1024 *1024 * 50; /* 3MB */
 
-    public Object[] writeOrUpdateFile(HttpServletRequest request, Set<String> titleValue, String path) throws FileUploadException, Exception {
+    public Object[] writeOrUpdateFile(HttpServletRequest request, Set<String> titleValue, String path) {
         // ServletContext servletContext = request.getServletContext();
         ServletContext context = request.getSession().getServletContext();
-        String address = context.getRealPath("image");
+        String address = context.getRealPath("fileupload");
         boolean check = true;
         String fileLocation = null;
         String fileName = null;
@@ -46,36 +48,45 @@ public class UploadUtil {
         // Set overall request size constraint
         upload.setSizeMax(maxRequestSize);
 
-        // Parse the request
-        List<FileItem> items = upload.parseRequest(request);
-        for(FileItem item: items){
-            if(!item.isFormField()){
-                fileName = item.getName();
-                if(StringUtils.isNotBlank(fileName)){
-                    fileLocation = address + File.separator + path + File.separator + fileName;
-                    File uploadFile = new File(fileLocation);
+        try {
+            // Parse the request
+            List<FileItem> items = upload.parseRequest(request);
+            for(FileItem item: items){
+                if(!item.isFormField()){
+                    fileName = item.getName();
+                    if(StringUtils.isNotBlank(fileName)){
+                        fileLocation = address + File.separator + path + File.separator + fileName;
+                        File uploadFile = new File(fileLocation);
 
-                    boolean isExist = uploadFile.exists();
-                    if(isExist) {
-                        if(uploadFile.delete()) {
-                            item.write(uploadFile);
-                        } else {
+                        boolean isExist = uploadFile.exists();
+                        try{
+                            if(isExist) {
+                                uploadFile.delete();
+                                item.write(uploadFile);
+                            } else {
+                                item.write(uploadFile);
+                            }
+                        } catch (Exception e){
                             check = false;
+                            log.error(e.getMessage(), e);
                         }
-                    } else {
-                        item.write(uploadFile);
+
                     }
-                }
-            } else {
-                if(titleValue != null){
-                    String namefield = item.getFieldName();
-                    String valueField = item.getString();
-                    if(titleValue.contains(namefield)){
-                        mapReturnValue.put(namefield, valueField);
+                } else {
+                    if(titleValue != null){
+                        String fieldName = item.getFieldName();
+                        String fieldValue = item.getString();
+                        if(titleValue.contains(fieldName)){
+                            mapReturnValue.put(fieldName, fieldValue);
+                        }
                     }
                 }
             }
+        } catch(FileUploadException e){
+            check = false;
+            log.error(e.getMessage(), e);
         }
+
         return new Object[]{check, fileLocation, fileName, mapReturnValue};
     }
 

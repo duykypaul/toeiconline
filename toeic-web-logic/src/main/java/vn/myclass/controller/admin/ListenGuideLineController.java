@@ -63,7 +63,7 @@ public class ListenGuideLineController extends HttpServlet {
         HttpSession session = request.getSession();
         Set<String> titleValue = buildSetValueListenGuideLine();
 
-        try {
+        /*try {
             Object[] objects = uploadUtil.writeOrUpdateFile(request, titleValue, WebConstant.LISTENGUIDELINE);
             Map<String, String> mapReturnValue = (Map<String, String>) objects[3];
             command = returnValueListenGuideLineCommand(titleValue, command, mapReturnValue);
@@ -77,7 +77,7 @@ public class ListenGuideLineController extends HttpServlet {
             log.error(e.getMessage(), e);
             session.setAttribute(WebConstant.ALERT, WebConstant.TYPE_ERROR);
             session.setAttribute(WebConstant.MESSAGE_RESPONSE, resourceBundle.getString("label.error"));
-        }
+        }*/
         response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list");
     }
 

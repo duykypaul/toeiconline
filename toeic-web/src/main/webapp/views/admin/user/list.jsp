@@ -7,6 +7,9 @@
 <c:url var="listUserUrl" value="/admin-user-list.html">
     <c:param name="urlType" value="url_list"/>
 </c:url>
+<c:url var="importUrl" value="/admin-user-import-list.html">
+    <c:param name="urlType" value="show_import_user"/>
+</c:url>
 <head>
     <title><fmt:message key="label.user.management" bundle="${lang}"/></title>
 </head>
@@ -65,6 +68,14 @@
                                                     </span>
                                             </button>
 
+                                            <a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" href="${importUrl}"
+                                               data-toggle="tooltip"
+                                               title="<fmt:message key='label.import.user' bundle='${lang}'/>">
+                                                <span>
+                                                    <i class="fa fa-file bigger-110" aria-hidden="true"></i>
+                                                </span>
+                                            </a>
+
                                         </div>
                                     </div>
                                 </div>
@@ -72,10 +83,8 @@
                         </div>
                         <div class="table-responsive">
                             <fmt:bundle basename="ApplicationResources">
-                                <display:table id="tableList" name="items.listResult" partialList="true"
-                                               size="${items.totalItems}"
-                                               pagesize="${items.maxPageItems}" sort="external"
-                                               requestURI="${requestUrl}"
+                                <display:table id="tableList" name="items.listResult" partialList="true" size="${items.totalItems}"
+                                               pagesize="${items.maxPageItems}" sort="external" requestURI="${requestUrl}"
                                                class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
                                                style="margin: 3em 0 1.5em;">
                                     <display:column title="<fieldset class='form-group'>
