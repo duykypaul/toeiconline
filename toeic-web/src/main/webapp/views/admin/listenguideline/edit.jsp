@@ -11,6 +11,12 @@
 <html>
 <head>
     <title><title><fmt:message key="label.guideline.listen.list" bundle="${lang}"/></title></title>
+    <style>
+        .error{
+            color: red;
+            font-size: small;
+        }
+    </style>
 </head>
 <body>
 <div class="main-content">
@@ -39,13 +45,13 @@
                                 ${messageResponse}
                         </div>
                     </c:if>
-                    <form action="${formUrl}" method="post" enctype="multipart/form-data" >
+                    <form action="${formUrl}" method="post" enctype="multipart/form-data" id="formEdit" >
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">
                                 <fmt:message key="label.guideline.listen.title" bundle="${lang}"/>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" name="pojo.title" />
+                                <input type="text" name="pojo.title" id="title"/>
                             </div>
                         </div>
                         <br />
@@ -55,7 +61,7 @@
                                 <fmt:message key="label.grammarguideline.upload.image" bundle="${lang}"/>
                             </label>
                             <div class="col-sm-9">
-                                <input type="file" name="file" />
+                                <input type="file" name="file" id="image"/>
                             </div>
                         </div>
                         <br />
@@ -88,7 +94,36 @@
     var editor = '';
     $(document).ready(function() {
         editor = CKEDITOR.replace('listenGuideLineContent');
+        validateData();
     });
+    function validateData(){
+        $('#formEdit').validate({
+            ignore: [],
+            rules: [],
+            messages: []
+        });
+        $("#title" ).rules( "add", {
+            required: true,
+            messages: {
+                required: '<fmt:message key="label.empty" bundle="${lang}"/>'
+            }
+        });
+        $("#image" ).rules( "add", {
+            required: true,
+            messages: {
+                required: '<fmt:message key="label.empty" bundle="${lang}"/>'
+            }
+        });
+        $("#listenGuideLineContent" ).rules( "add", {
+            required: function () {
+                CKEDITOR.instances.listenGuideLineContent.updateElement();
+            },
+            messages: {
+                required: '<fmt:message key="label.empty" bundle="${lang}"/>'
+            }
+        });
+    }
+
 </script>
 </body>
 </html>
