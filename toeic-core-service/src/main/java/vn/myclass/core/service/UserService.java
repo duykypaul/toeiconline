@@ -14,4 +14,5 @@ public interface UserService {
     void saveUser(UserDTO dto);
     UserDTO updateUser(UserDTO dto);
     void validateImportUser(List<UserImportDTO> userImportDTOS);
+    void saveUserImport(List<UserImportDTO> userImportDTOS);
 }

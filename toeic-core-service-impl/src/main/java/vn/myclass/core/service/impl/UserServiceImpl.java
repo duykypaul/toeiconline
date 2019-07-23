@@ -114,4 +114,18 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    public void saveUserImport(List<UserImportDTO> userImportDTOS) {
+        for(UserImportDTO item : userImportDTOS){
+            if(item.isValid()){
+                UserEntity entity = new UserEntity();
+                entity.setName(item.getUserName());
+                entity.setPassword(item.getPassword());
+                entity.setFullName(item.getFullName());
+                entity.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+                entity.setRoleEntity(SingletonDaoUtil.getRoleDaoInstance().findEqualsUnique("name", item.getRoleName().toUpperCase()));
+                SingletonDaoUtil.getUserDaoInstance().save(entity);
+            }
+        }
+    }
 }

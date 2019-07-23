@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
+import org.hibernate.Session;
 import vn.myclass.command.UserCommand;
 import vn.myclass.core.common.utils.ExcelPoiUtil;
 import vn.myclass.core.common.utils.SessionUtil;
@@ -39,6 +40,7 @@ public class UserController extends HttpServlet {
     private final String READ_EXCEL = "read_excel";
     private final String VALIDATE_IPMPORT = "validate_import";
     private final String LIST_USER_IMPORT= "list_user_import";
+    private final String IMPORT_DATA= "import_data";
     ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserCommand command = FormUtil.populate(UserCommand.class, request);
@@ -49,7 +51,7 @@ public class UserController extends HttpServlet {
             Object[] objects = SingletonServiceUtil.getUserServiceInstance().findUserByProperties(property, command.getSortExpression(), command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
             command.setListResult((List<UserDTO>) objects[1]);
             command.setTotalItems(Integer.parseInt(objects[0].toString()));
-            command.setMaxPageItems(4);
+            command.setMaxPageItems(3);
             request.setAttribute(WebConstant.LIST_ITEMS, command);
             if(command.getCrudaction() != null){
                 Map<String, String> mapMessage = buildMapRedirectMessage(bundle);
@@ -119,6 +121,12 @@ public class UserController extends HttpServlet {
                     SessionUtil.getInstance().putValue(request, LIST_USER_IMPORT, excelValues);
                     response.sendRedirect("/admin-user-import-validate.html?urlType=validate_import");
                 }
+            }
+            if(command.getUrlType() != null && command.getUrlType().equals(IMPORT_DATA)){
+                List<UserImportDTO> userImportDTOS = (List<UserImportDTO>) SessionUtil.getInstance().getValue(request, LIST_USER_IMPORT);
+                SingletonServiceUtil.getUserServiceInstance().saveUserImport(userImportDTOS);
+                SessionUtil.getInstance().removeValue(request, LIST_USER_IMPORT);
+                response.sendRedirect("/admin-user-list.html?urlType=url_list");
             }
         } catch (Exception e){
             log.error(e.getMessage(), e);
