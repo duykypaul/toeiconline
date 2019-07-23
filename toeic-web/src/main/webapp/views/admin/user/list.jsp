@@ -7,7 +7,7 @@
 <c:url var="listUserUrl" value="/admin-user-list.html">
     <c:param name="urlType" value="url_list"/>
 </c:url>
-<c:url var="importUrl" value="/admin-user-import-list.html">
+<c:url var="importUrl" value="/admin-user-import.html">
     <c:param name="urlType" value="show_import_user"/>
 </c:url>
 <head>
@@ -97,7 +97,6 @@
                                         </fieldset>
                                     </display:column>
                                     <display:column property="name" titleKey="label.user.name" sortable="true" sortName="name"/>
-
                                     <display:column property="fullName" titleKey="label.user.fullName" sortable="true" sortName="fullName"/>
                                     <display:column property="createdDate" titleKey="label.user.createdDate" sortable="true" sortName="createdDate"/>
 
