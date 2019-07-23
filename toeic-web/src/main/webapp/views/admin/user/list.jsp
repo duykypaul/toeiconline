@@ -98,7 +98,7 @@
                                     </display:column>
                                     <display:column property="name" titleKey="label.user.name" sortable="true" sortName="name"/>
                                     <display:column property="fullName" titleKey="label.user.fullName" sortable="true" sortName="fullName"/>
-                                    <display:column property="createdDate" titleKey="label.user.createdDate" sortable="true" sortName="createdDate"/>
+                                    <display:column property="createdDate" titleKey="label.createdDate" sortable="true" sortName="createdDate"/>
 
                                     <display:column headerClass="col-actions" titleKey="label.action">
                                         <c:url var="editUrl" value="/ajax-admin-user-edit.html">

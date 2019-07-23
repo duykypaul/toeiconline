@@ -13,7 +13,7 @@ import java.util.Map;
 public class ListenGuideLineServiceImpl implements ListenGuideLineService {
     public Object[] findListenGuideLineByProperties(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
         List<ListenGuideLineDTO> result = new ArrayList<ListenGuideLineDTO>();
-        Object[] objects = SingletonDaoUtil.getListenGuideLineDaoInstance().findByProperty( property, sortExpression, sortDirection, offset, limit);
+        Object[] objects = SingletonDaoUtil.getListenGuideLineDaoInstance().findByProperty(property, sortExpression, sortDirection, offset, limit);
         for(ListenGuideLineEntity item: (List<ListenGuideLineEntity>)objects[1]){
             result.add(ListenGuideLineBeanUtil.entity2Dto(item));
         }
