@@ -1,4 +1,4 @@
-<%@include file="/common/taglib.jsp"%>
+<%@include file="/common/taglib.jsp" %>
 <%--
   Created by IntelliJ IDEA.
   User: CACLV
@@ -7,11 +7,11 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<c:url var="requestUrl" value="/admin-guideline-listen-list.html" />
+<c:url var="requestUrl" value="/admin-guideline-listen-list.html"/>
 <c:url value="/admin-guideline-listen-edit.html" var="listenGuideLineEditUrl">
     <c:param name="urlType" value="url_edit"/>
 </c:url>
-<c:url var="formUrl" value="/admin-guideline-listen-list.html" />
+<c:url var="formUrl" value="/admin-guideline-listen-list.html"/>
 <html>
 <head>
     <title><fmt:message key="label.guideline.listen.list" bundle="${lang}"/></title>
@@ -21,7 +21,10 @@
     <div class="main-content-inner">
         <div class="breadcrumbs" id="breadcrumbs">
             <script type="text/javascript">
-                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {
+                }
             </script>
 
             <ul class="breadcrumb">
@@ -60,10 +63,13 @@
                                         <div class="widget-main">
                                             <div class="form-horizontal">
                                                 <div class="form-group">
-                                                    <label class="col-sm-2 control-label"><fmt:message key="label.guideline.listen.title" bundle="${lang}"/></label>
+                                                    <label class="col-sm-2 control-label"><fmt:message
+                                                            key="label.guideline.listen.title"
+                                                            bundle="${lang}"/></label>
                                                     <div class="col-sm-8">
                                                         <div class="fg-line">
-                                                            <input type="text" value="${items.pojo.title}" class="form-control input-sm" name="pojo.title"/>
+                                                            <input type="text" value="${items.pojo.title}"
+                                                                   class="form-control input-sm" name="pojo.title"/>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -86,16 +92,20 @@
                                             <c:url var="addUrl" value="/admin-guideline-listen-edit.html">
                                                 <c:param name="urlType" value="url_edit"/>
                                             </c:url>
-                                            <a flag="info" class="dt-button buttons-colvis btn btn-white btn-primary btn-bold" href="#"
+                                            <a flag="info"
+                                               class="dt-button buttons-colvis btn btn-white btn-primary btn-bold"
+                                               href="${addUrl}"
                                                data-toggle="tooltip"
-                                               title="<fmt:message key='label.guideline.listen.add' bundle='${lang}'/>"
-                                            >
+                                               title="<fmt:message key='label.guideline.listen.add' bundle='${lang}'/>">
                                                         <span>
                                                             <i class="fa fa-plus-circle bigger-110 purple"></i>
                                                         </span>
                                             </a>
-                                            <button type="button" class="dt-button buttons-html5 btn btn-white btn-primary btn-bold" id="deleteAll" disabled onclick=""
-                                                    data-toggle="tooltip" title="<fmt:message key='label.delete.all' bundle='${lang}'/>">
+                                            <button type="button"
+                                                    class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
+                                                    id="deleteAll" disabled onclick=""
+                                                    data-toggle="tooltip"
+                                                    title="<fmt:message key='label.delete.all' bundle='${lang}'/>">
                                                          <span>
                                                             <i class="fa fa-trash-o bigger-110 pink"></i>
                                                         </span>
@@ -107,8 +117,10 @@
                         </div>
                         <div class="table-responsive">
                             <fmt:bundle basename="ApplicationResources">
-                                <display:table id="tableList" name="items.listResult" partialList="true" size="${items.totalItems}"
-                                               pagesize="${items.maxPageItems}" sort="external" requestURI="${requestUrl}"
+                                <display:table id="tableList" name="items.listResult" partialList="true"
+                                               size="${items.totalItems}"
+                                               pagesize="${items.maxPageItems}" sort="external"
+                                               requestURI="${requestUrl}"
                                                class="table table-fcv-ace table-striped table-bordered table-hover dataTable no-footer"
                                                style="margin: 3em 0 1.5em;">
                                     <display:column title="<fieldset class='form-group'>
@@ -116,18 +128,24 @@
                                                                 </fieldset>" class="center select-cell"
                                                     headerClass="center select-cell">
                                         <fieldset>
-                                            <input type="checkbox" name="checkList" id="checkbox_${tableList.listenGuideLineId}"
+                                            <input type="checkbox" name="checkList"
+                                                   id="checkbox_${tableList.listenGuideLineId}"
                                                    value="${tableList.listenGuideLineId}" class="check-box-element"/>
                                         </fieldset>
                                     </display:column>
-                                    <display:column property="title" titleKey="label.guideline.listen.title" sortable="true" sortName="title"/>
-                                    <display:column property="content" titleKey="label.guideline.listen.content" sortable="true" sortName="content" />
-                                    <display:column property="createdDate" titleKey="label.createdDate" sortable="true" sortName="createdDate"/>
-                                    <display:column property="modifiedDate" titleKey="label.modifiedDate" sortable="true" sortName="modifiedDate"/>
+                                    <display:column property="title" titleKey="label.guideline.listen.title"
+                                                    sortable="true" sortName="title"/>
+                                    <display:column property="content" titleKey="label.guideline.listen.content"
+                                                    sortable="true" sortName="content"/>
+                                    <display:column property="createdDate" titleKey="label.createdDate" sortable="true"
+                                                    sortName="createdDate"/>
+                                    <display:column property="modifiedDate" titleKey="label.modifiedDate"
+                                                    sortable="true" sortName="modifiedDate"/>
                                     <display:column headerClass="col-actions" titleKey="label.action">
                                         <c:url var="editUrl" value="">
                                             <c:param name="urlType" value="url_edit"/>
-                                            <c:param name="pojo.listenGuideLineId" value="${tableList.listenGuideLineId}"/>
+                                            <c:param name="pojo.listenGuideLineId"
+                                                     value="${tableList.listenGuideLineId}"/>
                                         </c:url>
                                         <a class="btn btn-sm btn-primary btn-edit" sc-url="${editUrl}"
                                            onclick="" data-toggle="tooltip"
@@ -140,7 +158,7 @@
                                 </display:table>
                             </fmt:bundle>
                         </div>
-                        <input type="hidden" name="urlType" id="urlType" />
+                        <input type="hidden" name="urlType" id="urlType"/>
                     </form>
                 </div>
             </div>

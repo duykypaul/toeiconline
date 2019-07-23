@@ -64,8 +64,13 @@
                             <label class="col-sm-3 control-label no-padding-right">
                                 <fmt:message key="label.guideline.listen.content" bundle="${lang}"/>
                             </label>
-                            <div class="col-sm-9">
-                                <input type="text" name="pojo.content"/>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-12">
+                                <c:if test="${not empty item.pojo.content}">
+                                    <c:set var="content" value="${item.pojo.content}"/>
+                                </c:if>
+                                <textarea name="pojo.content" cols="80" rows="10" id="listenGuideLineContent">${content}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -79,5 +84,11 @@
         </div>
     </div>
 </div>
+<script>
+    var editor = '';
+    $(document).ready(function() {
+        editor = CKEDITOR.replace('listenGuideLineContent');
+    });
+</script>
 </body>
 </html>
