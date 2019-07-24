@@ -103,7 +103,7 @@
                                             </a>
                                             <button type="button"
                                                     class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
-                                                    id="deleteAll" disabled onclick=""
+                                                    id="deleteAll" disabled onclick="warningBeforeDelete()"
                                                     data-toggle="tooltip"
                                                     title="<fmt:message key='label.delete.all' bundle='${lang}'/>">
                                                          <span>
@@ -171,7 +171,12 @@
             $('#urlType').val('url_list');
             $('#formUrl').submit();
         });
-    })
+    });
+    function warningBeforeDelete() {
+        showAlertBeforeDelete(function () {
+
+        });
+    }
 </script>
 </body>
 </html>
