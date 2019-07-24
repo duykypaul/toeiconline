@@ -9,4 +9,5 @@ public interface ListenGuideLineService {
     Object[] findListenGuideLineByProperties(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit);
     ListenGuideLineDTO findListenGuideLineById(String property, Integer listenGuideLineId);
     void saveListenGuideLineDTO(ListenGuideLineDTO dto) throws ConstraintViolationException;
+    ListenGuideLineDTO updateListenGuideline(ListenGuideLineDTO dto);
 }

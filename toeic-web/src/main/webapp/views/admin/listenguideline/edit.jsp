@@ -56,6 +56,7 @@
                         </div>
                         <br />
                         <br />
+                        <br />
                         <div class="form-group">
                             <label class="col-sm-3 control-label no-padding-right">
                                 <fmt:message key="label.grammarguideline.upload.image" bundle="${lang}"/>
@@ -66,7 +67,7 @@
                         </div>
                         <br />
                         <br />
-                        <div class="form-group">
+                        <div class="form-group" id="formViewImage" >
                             <label class="col-sm-3 control-label no-padding-right">
                                 <fmt:message key="label.grammarguideline.upload.image.view" bundle="${lang}"/>
                             </label>
@@ -108,11 +109,26 @@
 </div>
 <script>
     var editor = '';
+    var listenGuideLineId = '';
+    var setHideFormViewImage = false;
+    <c:if test="${not empty item.pojo.listenGuideLineId}">
+        listenGuideLineId = ${item.pojo.listenGuideLineId}
+
+    </c:if>
+    <c:if test="${empty item.pojo.listenGuideLineId}">
+        setHideFormViewImage = true;
+    </c:if>
     $(document).ready(function() {
         editor = CKEDITOR.replace('listenGuideLineContent');
-        // validateData();
+        if(setHideFormViewImage){
+            if($('#uploadImage').val() == ""){
+                $('#formViewImage').hide();
+            }
+        }
+        validateData();
         $('#uploadImage').change(function () {
             readURL(this, 'viewImage');
+            $('#formViewImage').show();
         });
     });
     function validateData(){
@@ -127,12 +143,14 @@
                 required: '<fmt:message key="label.empty" bundle="${lang}"/>'
             }
         });
-        $("#uploadImage" ).rules( "add", {
-            required: true,
-            messages: {
-                required: '<fmt:message key="label.empty" bundle="${lang}"/>'
-            }
-        });
+        if (listenGuideLineId == ''){
+            $("#uploadImage" ).rules( "add", {
+                required: true,
+                messages: {
+                    required: '<fmt:message key="label.empty" bundle="${lang}"/>'
+                }
+            });
+        }
         $("#listenGuideLineContent" ).rules( "add", {
             required: function () {
                 CKEDITOR.instances.listenGuideLineContent.updateElement();

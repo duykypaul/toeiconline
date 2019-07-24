@@ -101,6 +101,18 @@ public class ListenGuideLineController extends HttpServlet {
             if(dto != null) {
                 if (dto.getListenGuideLineId() != null) {
                     /*update*/
+                    ListenGuideLineDTO listenGuideLineDTO = SingletonServiceUtil.getListenGuidelineServiceInstance()
+                            .findListenGuideLineById("listenGuideLineId", dto.getListenGuideLineId());
+                    if(dto.getImage() ==  null) {
+                        dto.setImage(listenGuideLineDTO.getImage());
+                    }
+                    dto.setCreatedDate(listenGuideLineDTO.getCreatedDate());
+                    ListenGuideLineDTO result = SingletonServiceUtil.getListenGuidelineServiceInstance().updateListenGuideline(dto);
+                    if(result != null){
+                        response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_update");
+                    } else {
+                        response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
+                    }
                 } else {
                     /*insert */
                     try {
@@ -109,12 +121,10 @@ public class ListenGuideLineController extends HttpServlet {
                     } catch (ConstraintViolationException e){
                         log.error(e.getMessage(), e);
                         response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
-
                     }
 
                 }
             }
-
         }
     }
 

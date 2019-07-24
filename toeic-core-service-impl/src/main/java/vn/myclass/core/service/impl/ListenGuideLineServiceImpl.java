@@ -31,4 +31,11 @@ public class ListenGuideLineServiceImpl implements ListenGuideLineService {
         dto.setCreatedDate(new Timestamp(System.currentTimeMillis()));
         SingletonDaoUtil.getListenGuideLineDaoInstance().save(ListenGuideLineBeanUtil.dto2Entity(dto));
     }
+
+    public ListenGuideLineDTO updateListenGuideline(ListenGuideLineDTO dto) {
+        dto.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+        ListenGuideLineEntity entity = ListenGuideLineBeanUtil.dto2Entity(dto);
+        entity = SingletonDaoUtil.getListenGuideLineDaoInstance().update(entity);
+        return ListenGuideLineBeanUtil.entity2Dto(entity);
+    }
 }
