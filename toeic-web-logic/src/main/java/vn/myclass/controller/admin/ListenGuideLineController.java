@@ -3,6 +3,7 @@ package vn.myclass.controller.admin;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.hibernate.exception.ConstraintViolationException;
 import vn.myclass.command.ListenGuideLineCommand;
 import vn.myclass.core.common.utils.UploadUtil;
 import vn.myclass.core.dto.ListenGuideLineDTO;
@@ -88,7 +89,7 @@ public class ListenGuideLineController extends HttpServlet {
 
         boolean checkStatusUploadImage = (Boolean) objects[0];
         if(!checkStatusUploadImage){
-            response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&&crudaction=redirect_insert");
+            response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
         } else {
             ListenGuideLineDTO dto = command.getPojo();
             if(StringUtils.isNotBlank(objects[2].toString())){
@@ -102,13 +103,19 @@ public class ListenGuideLineController extends HttpServlet {
                     /*update*/
                 } else {
                     /*insert */
-                    SingletonServiceUtil.getListenGuidelineServiceInstance().saveListenGuideLineDTO(dto);
-                    response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&&crudaction=redirect_insert");
+                    try {
+                        SingletonServiceUtil.getListenGuidelineServiceInstance().saveListenGuideLineDTO(dto);
+                        response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_insert");
+                    } catch (ConstraintViolationException e){
+                        log.error(e.getMessage(), e);
+                        response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
+
+                    }
+
                 }
             }
 
         }
-        response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list");
     }
 
     private ListenGuideLineDTO returnValueOfDTO(ListenGuideLineDTO dto, Map<String, String> mapReturnValue) {
