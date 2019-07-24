@@ -147,8 +147,8 @@
                                             <c:param name="pojo.listenGuideLineId"
                                                      value="${tableList.listenGuideLineId}"/>
                                         </c:url>
-                                        <a class="btn btn-sm btn-primary btn-edit" sc-url="${editUrl}"
-                                           onclick="" data-toggle="tooltip"
+                                        <a class="btn btn-sm btn-primary btn-edit" href="${editUrl}"
+                                            data-toggle="tooltip"
                                            title="<fmt:message key='label.guideline.listen.edit' bundle='${lang}'/>"><i
                                                 class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
                                         <a class="btn btn-sm btn-danger btn-cancel" data-toggle="tooltip"

@@ -51,7 +51,7 @@
                                 <fmt:message key="label.guideline.listen.title" bundle="${lang}"/>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" name="pojo.title" id="title"/>
+                                <input type="text" name="pojo.title" id="title" value="${item.pojo.title}"/>
                             </div>
                         </div>
                         <br />
@@ -61,7 +61,20 @@
                                 <fmt:message key="label.grammarguideline.upload.image" bundle="${lang}"/>
                             </label>
                             <div class="col-sm-9">
-                                <input type="file" name="file" id="image"/>
+                                <input type="file" name="file" id="uploadImage"/>
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <div class="form-group">
+                            <label class="col-sm-3 control-label no-padding-right">
+                                <fmt:message key="label.grammarguideline.upload.image.view" bundle="${lang}"/>
+                            </label>
+                            <div class="col-sm-9">
+                                <c:if test="${not empty item.pojo.image}">
+                                    <c:set var="image" value="/fileupload/listenguideline/${item.pojo.image}"/>
+                                </c:if>
+                                <img src="${image}" id="viewImage" width="150px" height="150px">
                             </div>
                         </div>
                         <br />
@@ -95,6 +108,9 @@
     $(document).ready(function() {
         editor = CKEDITOR.replace('listenGuideLineContent');
         validateData();
+        $('#uploadImage').change(function () {
+            readURL(this, 'viewImage');
+        });
     });
     function validateData(){
         $('#formEdit').validate({
@@ -108,7 +124,7 @@
                 required: '<fmt:message key="label.empty" bundle="${lang}"/>'
             }
         });
-        $("#image" ).rules( "add", {
+        $("#uploadImage" ).rules( "add", {
             required: true,
             messages: {
                 required: '<fmt:message key="label.empty" bundle="${lang}"/>'
@@ -123,7 +139,15 @@
             }
         });
     }
-
+    function readURL(input, viewImage) {
+        if(input.files && input.files[0]){
+            var reader = new FileReader();
+            reader.onload = function (ev) {
+                $('#' + viewImage).attr('src', reader.result);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
 </script>
 </body>
 </html>
