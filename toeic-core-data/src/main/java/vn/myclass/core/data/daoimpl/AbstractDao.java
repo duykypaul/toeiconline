@@ -1,5 +1,6 @@
 package vn.myclass.core.data.daoimpl;
 
+import org.apache.log4j.Logger;
 import org.hibernate.*;
 import vn.myclass.core.common.constant.CoreConstant;
 import vn.myclass.core.common.utils.HibernateUtil;
@@ -12,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T> {
+    private final Logger log = Logger.getLogger(this.getClass());
     private Class<T> persistenceClass;
 
     public AbstractDao(){
@@ -35,6 +37,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();
@@ -54,6 +57,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();
@@ -70,6 +74,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();
@@ -89,6 +94,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();
@@ -139,8 +145,8 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             StringBuilder sql2 = new StringBuilder("select count(*) from ");
             sql2.append(this.getPersistenceClassName());
             if(property.size() > 0) {
-                for(int i = 0; i < params.length; i++){
-                    sql2.append((i == 0) ? " where " : " and ").append(params[i]).append("= :" + params[i] + "");
+                for(int t = 0; t < params.length; t++){
+                    sql2.append((t == 0) ? " where " : " and ").append(params[t]).append("= :" + params[t] + "");
                 }
             }
 
@@ -154,6 +160,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();
@@ -176,6 +183,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             transaction.commit();
         } catch (HibernateException e) {
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();
@@ -194,6 +202,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             result = (T) query.uniqueResult();
         } catch(HibernateException e){
             transaction.rollback();
+            log.error(e.getMessage(), e);
             throw e;
         } finally {
             session.close();

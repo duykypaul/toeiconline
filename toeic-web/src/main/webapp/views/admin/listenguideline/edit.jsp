@@ -97,6 +97,9 @@
                                 <input type="submit" class="btn btn-white btn-warning btn-bold" value="<fmt:message key="label.done" bundle="${lang}"/>" />
                             </div>
                         </div>
+                        <c:if test="${not empty item.pojo.listenGuideLineId}">
+                            <input type="hidden" name="pojo.listenGuideLineId" value="${item.pojo.listenGuideLineId}" />
+                        </c:if>
                     </form>
                 </div>
             </div>
@@ -107,7 +110,7 @@
     var editor = '';
     $(document).ready(function() {
         editor = CKEDITOR.replace('listenGuideLineContent');
-        validateData();
+        // validateData();
         $('#uploadImage').change(function () {
             readURL(this, 'viewImage');
         });
