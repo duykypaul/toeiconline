@@ -158,7 +158,7 @@
                                 </display:table>
                             </fmt:bundle>
                         </div>
-                        <input type="hidden" name="urlType" id="urlType"/>
+                        <input type="hidden" name="urlType" id="urlType" value="url_list"/>
                         <input type="hidden" name="crudaction" id="crudaction"/>
                     </form>
                 </div>
@@ -169,13 +169,11 @@
 <script>
     $(document).ready(function () {
         $('#btnSearch').click(function () {
-            $('#urlType').val('url_list');
             $('#formUrl').submit();
         });
     });
     function warningBeforeDelete() {
         showAlertBeforeDelete(function () {
-            $('#urlType').val('url_list');
             $('#crudaction').val('redirect_delete');
             $('#formUrl').submit();
         });
