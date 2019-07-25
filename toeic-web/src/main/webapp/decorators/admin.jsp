@@ -85,7 +85,7 @@
 <script src="<c:url value='/template/admin/assets/js/jquery-ui.min.js'/>"></script>
 
 <script type="text/javascript">
-    function showAlertBeforeDelete() {
+    function showAlertBeforeDelete(callback) {
         swal({
             title: "Xác nhận xóa",
             text: "Bạn có chắc chắn muốn xóa (những) dòng đã chọn không?",
@@ -96,6 +96,10 @@
             confirmButtonClass: "btn btn-success",
             cancelButtonClass: "btn btn-danger"
 
+        }).then(function(isConfirm) {
+            if (isConfirm) {
+                callback();
+            }
         });
     }
 </script>

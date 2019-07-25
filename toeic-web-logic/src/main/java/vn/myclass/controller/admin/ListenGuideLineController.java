@@ -1,14 +1,11 @@
 package vn.myclass.controller.admin;
 
-import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.hibernate.exception.ConstraintViolationException;
 import vn.myclass.command.ListenGuideLineCommand;
 import vn.myclass.core.common.utils.UploadUtil;
 import vn.myclass.core.dto.ListenGuideLineDTO;
-import vn.myclass.core.service.ListenGuideLineService;
-import vn.myclass.core.service.impl.ListenGuideLineServiceImpl;
 import vn.myclass.core.web.common.WebConstant;
 import vn.myclass.core.web.utils.FormUtil;
 import vn.myclass.core.web.utils.RequestUtil;
@@ -21,7 +18,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.*;
 
@@ -33,6 +29,16 @@ public class ListenGuideLineController extends HttpServlet {
         ListenGuideLineCommand command = FormUtil.populate(ListenGuideLineCommand.class, request);
         ResourceBundle resourceBundle = ResourceBundle.getBundle("ApplicationResources");
         if (command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_LIST)) {
+            if (command.getCrudaction() != null && command.getCrudaction().equals(WebConstant.REDIRECT_DELETE)) {
+                List<Integer> ids = new ArrayList<Integer>();
+                for (String item : command.getCheckList()){
+                    ids.add(Integer.parseInt(item));
+                }
+                Integer result = SingletonServiceUtil.getListenGuidelineServiceInstance().deleteListenGuideLines(ids);
+                if(result != ids.size()){
+                    command.setCrudaction(WebConstant.REDIRECT_ERROR);
+                }
+            }
             excuteSearchListenguideLine(request, command);
             if(command.getCrudaction() != null){
                 Map<String, String> mapMessage = buildMapRedirectMessage(resourceBundle);
