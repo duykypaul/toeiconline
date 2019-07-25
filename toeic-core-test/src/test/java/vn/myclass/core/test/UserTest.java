@@ -8,7 +8,7 @@ import vn.myclass.core.persistence.entity.UserEntity;
 
 public class UserTest {
     private transient final Logger log = Logger.getLogger(this.getClass());
-    @Test
+    /*@Test
     public void checkIsUserExist(){
         UserDao userDao = new UserDaoImpl();
         UserEntity entity = userDao.findUserByUsernameAndPassword("duykypaul", "123456");
@@ -24,5 +24,5 @@ public class UserTest {
         UserDao userDao = new UserDaoImpl();
         UserEntity entity = userDao.findUserByUsernameAndPassword("duykypaul", "123456");
         log.error(entity.getRoleEntity().getRoleId() + "-" + entity.getRoleEntity().getName());
-    }
+    }*/
 }

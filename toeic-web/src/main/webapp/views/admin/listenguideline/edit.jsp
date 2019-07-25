@@ -51,7 +51,7 @@
                                 <fmt:message key="label.guideline.listen.title" bundle="${lang}"/>
                             </label>
                             <div class="col-sm-9">
-                                <input type="text" name="pojo.title" id="title" value="${item.pojo.title}"/>
+                                <input type="text" name="pojo.title" id="title" style="width: 400px;" value="${item.pojo.title}"/>
                             </div>
                         </div>
                         <br />
@@ -90,7 +90,7 @@
                                 <c:if test="${not empty item.pojo.content}">
                                     <c:set var="content" value="${item.pojo.content}"/>
                                 </c:if>
-                                <textarea name="pojo.content" cols="80" rows="10" id="listenGuideLineContent">${content}</textarea>
+                                <textarea name="pojo.content" cols="80" rows="10" id="ListenGuideLineContent">${content}</textarea>
                             </div>
                         </div>
                         <div class="form-group">
@@ -119,7 +119,8 @@
         setHideFormViewImage = true;
     </c:if>
     $(document).ready(function() {
-        editor = CKEDITOR.replace('listenGuideLineContent');
+        editor = CKEDITOR.replace('ListenGuideLineContent');
+        CKFinder.setupCKEditor( editor, '/ckfinder/' );
         if(setHideFormViewImage){
             if($('#formViewImage').val() == ""){
                 $('#formViewImage').hide();
@@ -151,9 +152,9 @@
                 }
             });
         }
-        $("#listenGuideLineContent" ).rules( "add", {
+        $("#ListenGuideLineContent" ).rules( "add", {
             required: function () {
-                CKEDITOR.instances.listenGuideLineContent.updateElement();
+                CKEDITOR.instances.ListenGuideLineContent.updateElement();
             },
             messages: {
                 required: '<fmt:message key="label.empty" bundle="${lang}"/>'

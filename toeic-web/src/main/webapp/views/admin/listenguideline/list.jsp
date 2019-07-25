@@ -69,7 +69,8 @@
                                                     <div class="col-sm-8">
                                                         <div class="fg-line">
                                                             <input type="text" value="${items.pojo.title}"
-                                                                   class="form-control input-sm" name="pojo.title"/>
+                                                                   class="form-control input-sm" name="pojo.title"
+                                                                   />
                                                         </div>
                                                     </div>
                                                 </div>
@@ -135,8 +136,6 @@
                                     </display:column>
                                     <display:column property="title" titleKey="label.guideline.listen.title"
                                                     sortable="true" sortName="title"/>
-                                    <display:column property="content" titleKey="label.guideline.listen.content"
-                                                    sortable="true" sortName="content"/>
                                     <display:column property="createdDate" titleKey="label.createdDate" sortable="true"
                                                     sortName="createdDate"/>
                                     <display:column property="modifiedDate" titleKey="label.modifiedDate"
