@@ -20,6 +20,7 @@ import vn.myclass.core.service.impl.UserServiceImpl;
 import vn.myclass.core.service.utils.SingletonDaoUtil;
 import vn.myclass.core.web.common.WebConstant;
 import vn.myclass.core.web.utils.FormUtil;
+import vn.myclass.core.web.utils.RequestUtil;
 import vn.myclass.core.web.utils.SingletonServiceUtil;
 import vn.myclass.core.web.utils.WebCommonUtil;
 
@@ -48,10 +49,10 @@ public class UserController extends HttpServlet {
 
         if(command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_LIST)) {
             Map<String, Object> property = new HashMap<String, Object>();
+            RequestUtil.initSearchBean(request, command);
             Object[] objects = SingletonServiceUtil.getUserServiceInstance().findUserByProperties(property, command.getSortExpression(), command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
             command.setListResult((List<UserDTO>) objects[1]);
             command.setTotalItems(Integer.parseInt(objects[0].toString()));
-            command.setMaxPageItems(3);
             request.setAttribute(WebConstant.LIST_ITEMS, command);
             if(command.getCrudaction() != null){
                 Map<String, String> mapMessage = buildMapRedirectMessage(bundle);
@@ -72,9 +73,7 @@ public class UserController extends HttpServlet {
             rd.forward(request, response);
         } else if(command.getUrlType() != null && command.getUrlType().equals(VALIDATE_IPMPORT)) {
             List<UserImportDTO> userImportDTOS = (List<UserImportDTO>) SessionUtil.getInstance().getValue(request, LIST_USER_IMPORT);
-            command.setUserImportDTOS(userImportDTOS);
-            command.setTotalItems(userImportDTOS.size());
-            command.setMaxPageItems(3);
+            command.setUserImportDTOS(returnListUserImport(command, userImportDTOS, request));
             request.setAttribute(WebConstant.LIST_ITEMS, command);
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/importuser.jsp");
             rd.forward(request, response);
@@ -133,6 +132,25 @@ public class UserController extends HttpServlet {
             request.setAttribute(WebConstant.MESSAGE_RESPONSE, WebConstant.REDIRECT_ERROR);
         }
     }
+
+    private List<UserImportDTO> returnListUserImport(UserCommand command, List<UserImportDTO> userImportDTOS, HttpServletRequest request) {
+        command.setMaxPageItems(3);
+        RequestUtil.initSearchBean(request, command);
+        command.setTotalItems(userImportDTOS.size());
+        int fromIndex = command.getFirstItem();
+        if (fromIndex > command.getTotalItems()) {
+            fromIndex = 0;
+            command.setFirstItem(0);
+        }
+        int toIndex = command.getFirstItem() + command.getMaxPageItems();
+        if (userImportDTOS.size() > 0) {
+            if (toIndex > userImportDTOS.size()) {
+                toIndex = userImportDTOS.size();
+            }
+        }
+        return userImportDTOS.subList(fromIndex, toIndex);
+    }
+
 
     private void validateData(List<UserImportDTO> excelValues) {
         Set<String> stringSet = new HashSet<String>();
