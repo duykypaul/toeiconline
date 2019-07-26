@@ -1,3 +1,13 @@
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@include file="/common/taglib.jsp"%>
+<c:url var="logoutUrl" value="/logout.html">
+    <c:param name="action" value="logout"/>
+</c:url>
+<c:url var="loginUrl" value="/login.html">
+    <c:param name="action" value="login"/>
+</c:url>
 <!--HEADER ROW-->
 <div id="header-row">
     <div class="container">
@@ -26,8 +36,13 @@
                                 </li>
 
                                 <li><a href="service.html">Services</a></li>
-                                <li><a href="blog.html">Blog</a></li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <c:if test="${not empty login_name}">
+                                    <li><a><strong>Hi, ${login_name}</strong></a></li>
+                                    <li><a href="${logoutUrl}"><fmt:message key="label.logout" bundle="${lang}"/></a></li>
+                                </c:if>
+                                <c:if test="${empty login_name}">
+                                    <li><a href="${loginUrl}"><fmt:message key="label.login" bundle="${lang}"/></a></li>
+                                </c:if>
 
                             </ul>
                         </div>
