@@ -30,6 +30,9 @@ public class UserEntity {
     @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
     private List<CommentEntity> commentEntityList;
 
+    @OneToMany(mappedBy = "userEntity", fetch = FetchType.LAZY)
+    private List<ResultEntity> resultEntityList;
+
     public Integer getUserId() {
         return userId;
     }
@@ -84,5 +87,13 @@ public class UserEntity {
 
     public void setRoleEntity(RoleEntity roleEntity) {
         this.roleEntity = roleEntity;
+    }
+
+    public List<ResultEntity> getResultEntityList() {
+        return resultEntityList;
+    }
+
+    public void setResultEntityList(List<ResultEntity> resultEntityList) {
+        this.resultEntityList = resultEntityList;
     }
 }
