@@ -60,7 +60,7 @@
                                             </a>
                                             <button type="button"
                                                     class="dt-button buttons-html5 btn btn-white btn-primary btn-bold"
-                                                    id="deleteAll" disabled
+                                                    id="deleteAll" disabled onclick="warningBeforeDeleteMulti()"
                                                     data-toggle="tooltip"
                                                     title="<fmt:message key='label.delete.all' bundle='${lang}'/>">
                                                      <span>
@@ -109,7 +109,7 @@
                                            onclick="update(this)" data-toggle="tooltip"
                                            title="<fmt:message key='label.user.edit' bundle='${lang}'/>"><i
                                                 class="fa fa-pencil-square-o" aria-hidden="true"></i></a>
-                                        <a class="btn btn-sm btn-danger btn-cancel" data-toggle="tooltip"
+                                        <a class="btn btn-sm btn-danger btn-cancel" data-toggle="tooltip" onclick="warningBeforeDelete(${tableList.userId})"
                                            title="<fmt:message key='label.user.delete' bundle='${lang}'/>"><i
                                                 class="fa fa-trash" aria-hidden="true"></i></a>
                                     </display:column>
@@ -118,6 +118,7 @@
                         </div>
                         <input type="hidden" name="crudaction" id="crudaction">
                         <input type="hidden" name="urlType" id="urlType">
+                        <input type="hidden" name="checkList" id="checkList"/>
                     </form>
                 </div>
             </div>
@@ -174,6 +175,22 @@
                     console.log(response);
                 }
             });
+        });
+    }
+    function warningBeforeDeleteMulti() {
+        showAlertBeforeDelete(function () {
+            $('#urlType').val('url_list');
+            $('#crudaction').val('redirect_delete');
+            $('#checkList').prop("name", false);
+            $('#formUrl').submit();
+        });
+    }
+    function warningBeforeDelete(userId) {
+        showAlertBeforeDelete(function () {
+            $('#crudaction').val('redirect_delete');
+            $('#urlType').val('url_list');
+            $('#checkList').val('' +userId+'');
+            $('#formUrl').submit();
         });
     }
 </script>

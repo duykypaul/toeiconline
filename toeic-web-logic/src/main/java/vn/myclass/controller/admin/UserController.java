@@ -48,16 +48,25 @@ public class UserController extends HttpServlet {
         UserDTO pojo = command.getPojo();
 
         if(command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_LIST)) {
-            Map<String, Object> property = new HashMap<String, Object>();
-            RequestUtil.initSearchBean(request, command);
-            Object[] objects = SingletonServiceUtil.getUserServiceInstance().findUserByProperties(property, command.getSortExpression(), command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
-            command.setListResult((List<UserDTO>) objects[1]);
-            command.setTotalItems(Integer.parseInt(objects[0].toString()));
-            request.setAttribute(WebConstant.LIST_ITEMS, command);
+            if (command.getCrudaction() != null && command.getCrudaction().equals(WebConstant.REDIRECT_DELETE)) {
+                List<Integer> ids = new ArrayList<Integer>();
+                for (String item : command.getCheckList()){
+                    ids.add(Integer.parseInt(item));
+                }
+                Integer result = SingletonServiceUtil.getUserServiceInstance().deleteUsers(ids);
+
+                if(result != ids.size()){
+                    command.setCrudaction(WebConstant.REDIRECT_ERROR);
+                }
+            }
+            excuteSearchUser(request, command);
+
             if(command.getCrudaction() != null){
                 Map<String, String> mapMessage = buildMapRedirectMessage(bundle);
                 WebCommonUtil.addRedirectMessage(request, command.getCrudaction(), mapMessage);
             }
+
+            request.setAttribute(WebConstant.LIST_ITEMS, command);
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/list.jsp");
             rd.forward(request, response);
         } else if(command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_EDIT)) {
@@ -78,6 +87,16 @@ public class UserController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/importuser.jsp");
             rd.forward(request, response);
         }
+    }
+
+    private void excuteSearchUser(HttpServletRequest request, UserCommand command) {
+        Map<String, Object> property = new HashMap<String, Object>();
+        RequestUtil.initSearchBean(request, command);
+        Object[] objects = SingletonServiceUtil.getUserServiceInstance()
+                .findUserByProperties(property, command.getSortExpression(),
+                        command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
+        command.setListResult((List<UserDTO>) objects[1]);
+        command.setTotalItems(Integer.parseInt(objects[0].toString()));
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

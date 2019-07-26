@@ -128,4 +128,9 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
+    public Integer deleteUsers(List<Integer> ids) {
+        Integer result = SingletonDaoUtil.getUserDaoInstance().delete(ids);
+        return result;
+    }
 }

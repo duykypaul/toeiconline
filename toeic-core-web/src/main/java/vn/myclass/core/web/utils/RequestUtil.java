@@ -17,7 +17,6 @@ public class RequestUtil {
 
             Integer page = 1;
             if (StringUtils.isNotBlank(pageStr)){
-
                 try{
                     page = Integer.valueOf(pageStr);
                 } catch (Exception e){

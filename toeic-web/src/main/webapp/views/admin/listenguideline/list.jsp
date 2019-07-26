@@ -176,6 +176,7 @@
     function warningBeforeDeleteMulti() {
         showAlertBeforeDelete(function () {
             $('#crudaction').val('redirect_delete');
+            $('#checkList').prop("name", false);
             $('#formUrl').submit();
         });
     }

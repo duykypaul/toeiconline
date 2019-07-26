@@ -18,6 +18,7 @@ public class AbstractCommand<T> {
     private String urlType;
     private int totalPages;
 
+
     public List<T> getListResult() {
         return listResult;
     }
