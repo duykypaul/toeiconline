@@ -1,34 +1,87 @@
 package vn.myclass.core.service.utils;
 
-import vn.myclass.core.daoimpl.ListenGuideLineDaoImpl;
-import vn.myclass.core.daoimpl.RoleDaoImpl;
-import vn.myclass.core.daoimpl.UserDaoImpl;
+import vn.myclass.core.daoimpl.*;
 
 public class SingletonDaoUtil {
+    private static CommentDaoImpl commentDaoImpl = null;
+    private static ExaminationDaoImpl examinationDaoImpl = null;
+    private static ExaminationQuestionDaoImpl examinationQuestionDaoImpl = null;
+    private static ExerciseDaoImpl exerciseDaoImpl = null;
+    private static ExerciseQuestionDaoImpl exerciseQuestionDaoImpl = null;
+    private static ExerciseTypeDaoImpl exerciseTypeDaoImpl = null;
+    private static ListenGuideLineDaoImpl listenGuideLineDaoImpl = null;
+    private static ResultDaoImpl resultDaoImpl = null;
+    private static RoleDaoImpl roleDaoImpl = null;
+    private static UserDaoImpl userDaoImpl = null;
 
-        private static UserDaoImpl userDaoImpl = null;
-        private static RoleDaoImpl roleDaoImpl = null;
-        private static ListenGuideLineDaoImpl listenGuideLineDaoImpl = null;
 
-        public static UserDaoImpl getUserDaoInstance() {
-            if (userDaoImpl == null) {
-                userDaoImpl = new UserDaoImpl();
-            }
-            return userDaoImpl;
+    public static CommentDaoImpl getCommentDaoInstance() {
+        if (commentDaoImpl == null) {
+            commentDaoImpl = new CommentDaoImpl();
         }
+        return commentDaoImpl;
+    }
 
-        public static RoleDaoImpl getRoleDaoInstance() {
-            if (roleDaoImpl == null) {
-                roleDaoImpl = new RoleDaoImpl();
-            }
-            return roleDaoImpl;
+    public static ExaminationDaoImpl getExaminationDaoInstance() {
+        if (examinationDaoImpl == null) {
+            examinationDaoImpl = new ExaminationDaoImpl();
         }
+        return examinationDaoImpl;
+    }
 
-        public static ListenGuideLineDaoImpl getListenGuideLineDaoInstance() {
-            if (listenGuideLineDaoImpl == null) {
-                listenGuideLineDaoImpl = new ListenGuideLineDaoImpl();
-            }
-            return listenGuideLineDaoImpl;
+    public static ExaminationQuestionDaoImpl getExaminationQuestionDaoInstance() {
+        if (examinationQuestionDaoImpl == null) {
+            examinationQuestionDaoImpl = new ExaminationQuestionDaoImpl();
         }
+        return examinationQuestionDaoImpl;
+    }
 
+    public static ExerciseDaoImpl getExerciseDaoInstance() {
+        if (exerciseDaoImpl == null) {
+            exerciseDaoImpl = new ExerciseDaoImpl();
+        }
+        return exerciseDaoImpl;
+    }
+
+    public static ExerciseQuestionDaoImpl getExerciseQuestionDaoInstance() {
+        if (exerciseQuestionDaoImpl == null) {
+            exerciseQuestionDaoImpl = new ExerciseQuestionDaoImpl();
+        }
+        return exerciseQuestionDaoImpl;
+    }
+
+    public static ResultDaoImpl getResultDaoInstance() {
+        if (resultDaoImpl == null) {
+            resultDaoImpl = new ResultDaoImpl();
+        }
+        return resultDaoImpl;
+    }
+
+    public static ListenGuideLineDaoImpl getListenGuideLineDaoInstance() {
+        if (listenGuideLineDaoImpl == null) {
+            listenGuideLineDaoImpl = new ListenGuideLineDaoImpl();
+        }
+        return listenGuideLineDaoImpl;
+    }
+
+    public static ExerciseTypeDaoImpl getExerciseTypeDaoInstance() {
+        if (exerciseTypeDaoImpl == null) {
+            exerciseTypeDaoImpl = new ExerciseTypeDaoImpl();
+        }
+        return exerciseTypeDaoImpl;
+    }
+
+    public static RoleDaoImpl getRoleDaoInstance() {
+        if (roleDaoImpl == null) {
+            roleDaoImpl = new RoleDaoImpl();
+        }
+        return roleDaoImpl;
+    }
+
+    public static UserDaoImpl getUserDaoInstance() {
+        if (userDaoImpl == null) {
+            userDaoImpl = new UserDaoImpl();
+        }
+        return userDaoImpl;
+    }
 }

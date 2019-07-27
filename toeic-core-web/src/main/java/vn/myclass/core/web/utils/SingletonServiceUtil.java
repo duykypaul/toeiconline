@@ -1,20 +1,73 @@
 package vn.myclass.core.web.utils;
 
-import vn.myclass.core.service.impl.ListenGuideLineServiceImpl;
-import vn.myclass.core.service.impl.RoleServiceImpl;
-import vn.myclass.core.service.impl.UserServiceImpl;
+import vn.myclass.core.service.impl.*;
 
 public class SingletonServiceUtil {
-    private static UserServiceImpl userServiceImpl = null;
-    private static RoleServiceImpl roleServiceImpl = null;
+    private static CommentServiceImpl commentServiceImpl = null;
+    private static ExaminationQuestionServiceImpl examinationQuestionServiceImpl = null;
+    private static ExaminationServiceImpl examinationServiceImpl = null;
+    private static ExerciseQuestionServiceImpl exerciseQuestionServiceImpl = null;
+    private static ExerciseServiceImpl exerciseServiceImpl = null;
+    private static ExerciseTypeServiceImpl exerciseTypeServiceImpl = null;
     private static ListenGuideLineServiceImpl listenGuideLineServiceImpl = null;
+    private static ResultServiceImpl resultServiceImpl = null;
+    private static RoleServiceImpl roleServiceImpl = null;
+    private static UserServiceImpl userServiceImpl = null;
 
-
-    public static UserServiceImpl getUserServiceInstance() {
-        if (userServiceImpl == null) {
-            userServiceImpl = new UserServiceImpl();
+    public static CommentServiceImpl getCommentServiceInstance() {
+        if (commentServiceImpl == null) {
+            commentServiceImpl = new CommentServiceImpl();
         }
-        return userServiceImpl;
+        return commentServiceImpl;
+    }
+
+    public static ExaminationQuestionServiceImpl getExaminationQuestionServiceInstance() {
+        if (examinationQuestionServiceImpl == null) {
+            examinationQuestionServiceImpl = new ExaminationQuestionServiceImpl();
+        }
+        return examinationQuestionServiceImpl;
+    }
+
+    public static ExaminationServiceImpl getExaminationServiceInstance() {
+        if (examinationServiceImpl == null) {
+            examinationServiceImpl = new ExaminationServiceImpl();
+        }
+        return examinationServiceImpl;
+    }
+
+    public static ExerciseQuestionServiceImpl getExerciseQuestionServiceInstance() {
+        if (exerciseQuestionServiceImpl == null) {
+            exerciseQuestionServiceImpl = new ExerciseQuestionServiceImpl();
+        }
+        return exerciseQuestionServiceImpl;
+    }
+
+    public static ExerciseServiceImpl getExerciseServiceInstance() {
+        if (exerciseServiceImpl == null) {
+            exerciseServiceImpl = new ExerciseServiceImpl();
+        }
+        return exerciseServiceImpl;
+    }
+
+    public static ExerciseTypeServiceImpl getExerciseTypeServiceInstance() {
+        if (exerciseTypeServiceImpl == null) {
+            exerciseTypeServiceImpl = new ExerciseTypeServiceImpl();
+        }
+        return exerciseTypeServiceImpl;
+    }
+
+    public static ListenGuideLineServiceImpl getListenGuidelineServiceInstance() {
+        if (listenGuideLineServiceImpl == null) {
+            listenGuideLineServiceImpl = new ListenGuideLineServiceImpl();
+        }
+        return listenGuideLineServiceImpl;
+    }
+
+    public static ResultServiceImpl getResultServiceInstance() {
+        if (resultServiceImpl == null) {
+            resultServiceImpl = new ResultServiceImpl();
+        }
+        return resultServiceImpl;
     }
 
     public static RoleServiceImpl getRoleServiceInstance() {
@@ -24,11 +77,13 @@ public class SingletonServiceUtil {
         return roleServiceImpl;
     }
 
-    public static ListenGuideLineServiceImpl getListenGuidelineServiceInstance() {
-        if (listenGuideLineServiceImpl == null) {
-            listenGuideLineServiceImpl = new ListenGuideLineServiceImpl();
+    public static UserServiceImpl getUserServiceInstance() {
+        if (userServiceImpl == null) {
+            userServiceImpl = new UserServiceImpl();
         }
-        return listenGuideLineServiceImpl;
+        return userServiceImpl;
     }
+
+
 
 }
