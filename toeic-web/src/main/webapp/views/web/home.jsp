@@ -66,7 +66,7 @@
     </div>
     <div class="span4">
         <img src="img/icon3.png">
-        <h2>Feature A</h2>
+        <h2><fmt:message key="label.guideline.listen" bundle="${lang}"/></h2>
         <p>
             Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
         </p>
