@@ -14,15 +14,15 @@ public class ExerciseEntity {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "type")
+    private String type;
+
     @Column(name = "createddate")
     private Timestamp createdDate;
 
     @Column(name = "modifieddate")
     private Timestamp modifiedDate;
 
-    @ManyToOne
-    @JoinColumn(name = "exercisetypeid")
-    private ExerciseTypeEntity exerciseTypeEntity;
 
     @OneToMany(mappedBy = "exerciseEntity", fetch = FetchType.LAZY)
     private List<ExerciseQuestionEntity> exerciseQuestionEntityList;
@@ -60,14 +60,6 @@ public class ExerciseEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public ExerciseTypeEntity getExerciseTypeEntity() {
-        return exerciseTypeEntity;
-    }
-
-    public void setExerciseTypeEntity(ExerciseTypeEntity exerciseTypeEntity) {
-        this.exerciseTypeEntity = exerciseTypeEntity;
-    }
-
     public List<ExerciseQuestionEntity> getExerciseQuestionEntityList() {
         return exerciseQuestionEntityList;
     }
@@ -76,4 +68,11 @@ public class ExerciseEntity {
         this.exerciseQuestionEntityList = exerciseQuestionEntityList;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
 }

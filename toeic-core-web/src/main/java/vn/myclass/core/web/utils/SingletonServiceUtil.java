@@ -8,7 +8,6 @@ public class SingletonServiceUtil {
     private static ExaminationServiceImpl examinationServiceImpl = null;
     private static ExerciseQuestionServiceImpl exerciseQuestionServiceImpl = null;
     private static ExerciseServiceImpl exerciseServiceImpl = null;
-    private static ExerciseTypeServiceImpl exerciseTypeServiceImpl = null;
     private static ListenGuideLineServiceImpl listenGuideLineServiceImpl = null;
     private static ResultServiceImpl resultServiceImpl = null;
     private static RoleServiceImpl roleServiceImpl = null;
@@ -47,13 +46,6 @@ public class SingletonServiceUtil {
             exerciseServiceImpl = new ExerciseServiceImpl();
         }
         return exerciseServiceImpl;
-    }
-
-    public static ExerciseTypeServiceImpl getExerciseTypeServiceInstance() {
-        if (exerciseTypeServiceImpl == null) {
-            exerciseTypeServiceImpl = new ExerciseTypeServiceImpl();
-        }
-        return exerciseTypeServiceImpl;
     }
 
     public static ListenGuideLineServiceImpl getListenGuidelineServiceInstance() {
