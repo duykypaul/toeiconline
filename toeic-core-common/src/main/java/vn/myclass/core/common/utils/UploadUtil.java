@@ -92,7 +92,11 @@ public class UploadUtil {
             log.error(e.getMessage(), e);
         }
 
-        return new Object[]{check, fileLocation, path + File.separator + fileName, mapReturnValue};
+        String name = "";
+        if(StringUtils.isNotBlank(fileName)){
+            name = path + File.separator + fileName;
+        }
+        return new Object[]{check, fileLocation, name , mapReturnValue};
     }
 
     private void checkAndCreateFolder(String address, String path) {
