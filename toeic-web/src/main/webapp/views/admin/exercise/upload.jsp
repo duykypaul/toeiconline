@@ -52,6 +52,7 @@
                             </label>
                             <div class="col-sm-9">
                                 <input type="file" name="file" multiple/>
+                                <br/>
                                 <input type="submit" class="btn btn-white btn-warning btn-bold" value="<fmt:message key="label.done" bundle="${lang}"/>" />
                             </div>
                         </div>
