@@ -6,6 +6,7 @@ import java.util.List;
 public class ExerciseDTO {
     private Integer exerciseId;
     private String name;
+    private String type;
     private Timestamp createdDate;
     private Timestamp modifiedDate;
     private List<ExerciseQuestionDTO> exerciseQuestions;
@@ -48,5 +49,13 @@ public class ExerciseDTO {
 
     public void setExerciseQuestions(List<ExerciseQuestionDTO> exerciseQuestions) {
         this.exerciseQuestions = exerciseQuestions;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }
