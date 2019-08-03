@@ -31,10 +31,10 @@
                     <div class="image group">
                         <div class="grid news_desc">
                             <h3>${item.name}</h3>
-                            <c:url value="/bai-tap-thưc-hanh.html" var="detailUrl">
-                                <c:param name="pojo.exerciseId" value="${item.exerciseId}"/>
+                            <c:url value="/bai-tap-thuc-hanh.html" var="detailUrl">
+                                <c:param name="pojo.exercise.exerciseId" value="${item.exerciseId}"/>
                             </c:url>
-                            <h4><span><a href="${detailUrl}">Chi tiết bài hướng dẫn</a></span>
+                            <h4><span><a href="${detailUrl}">Làm bài tập nghe</a></span>
                             </h4>
                         </div>
                     </div>

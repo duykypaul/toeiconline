@@ -19,20 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/danh-sach-bai-tap-nghe.html", "/bai-tap-thưc-hanh.html"})
+@WebServlet(urlPatterns = {"/danh-sach-bai-tap.html"})
 public class ExerciseController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ExerciseCommand command = FormUtil.populate(ExerciseCommand.class, request);
-        ExerciseDTO pojo = command.getPojo();
-        if (pojo.getExerciseId() != null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/views/web/exercise/detail.jsp");
-            rd.forward(request, response);
-        } else {
-            excuteSearchListenguideLine(request, command);
-            request.setAttribute(WebConstant.LIST_ITEMS, command);
-            RequestDispatcher rd = request.getRequestDispatcher("/views/web/exercise/list.jsp");
-            rd.forward(request, response);
-        }
+        excuteSearchListenguideLine(request, command);
+        request.setAttribute(WebConstant.LIST_ITEMS, command);
+        RequestDispatcher rd = request.getRequestDispatcher("/views/web/exercise/list.jsp");
+        rd.forward(request, response);
     }
 
     private void excuteSearchListenguideLine(HttpServletRequest request, ExerciseCommand command) {
