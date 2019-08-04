@@ -32,9 +32,10 @@
                         <div class="grid news_desc">
                             <h3>${item.name}</h3>
                             <c:url value="/bai-tap-thuc-hanh.html" var="detailUrl">
-                                <c:param name="pojo.exercise.exerciseId" value="${item.exerciseId}"/>
+                                <c:param name="exerciseId" value="${item.exerciseId}"/>
+                                <c:param name="page" value="1"/>
                             </c:url>
-                            <h4><span><a href="${detailUrl}">Làm bài tập nghe</a></span>
+                            <h4><span><a href="${detailUrl}">Làm bài tập</a></span>
                             </h4>
                         </div>
                     </div>

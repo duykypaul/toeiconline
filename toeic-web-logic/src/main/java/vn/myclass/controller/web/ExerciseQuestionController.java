@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@WebServlet(urlPatterns = {"/bai-tap-thuc-hanh.html"})
+@WebServlet(urlPatterns = {"/bai-tap-thuc-hanh.html", "/ajax-bai-tap-dap-an.html"})
 public class ExerciseQuestionController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ExerciseQuestionCommand command = FormUtil.populate(ExerciseQuestionCommand.class, request);
@@ -29,7 +29,16 @@ public class ExerciseQuestionController extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        ExerciseQuestionCommand command = FormUtil.populate(ExerciseQuestionCommand.class, request);
+        getListenExerciseQuestion(command);
+        for (ExerciseQuestionDTO item: command.getListResult()) {
+            if (!command.getAnswerUser().equals(item.getCorrectAnswer())) {
+                command.setCheckAnswer(true);
+            }
+        }
+        request.setAttribute(WebConstant.LIST_ITEMS, command);
+        RequestDispatcher rd = request.getRequestDispatcher("/views/web/exercise/result.jsp");
+        rd.forward(request, response);
     }
 
     private void getListenExerciseQuestion(ExerciseQuestionCommand command) {
@@ -47,11 +56,9 @@ public class ExerciseQuestionController extends HttpServlet {
     }
 
     private Map<String,Object> buildMap(ExerciseQuestionCommand command) {
-        ExerciseQuestionDTO pojo = command.getPojo();
         Map<String,Object> result = new HashMap<String, Object>();
-        if (pojo.getExercise() != null && pojo.getExercise().getExerciseId() != null) {
-            result.put("exercise.exerciseId", pojo.getExercise().getExerciseId());
-//            result.put("exerciseId", 1);
+        if (command.getExerciseId() != null) {
+            result.put("exerciseId", command.getExerciseId());
         }
         return result;
     }
