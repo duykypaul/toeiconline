@@ -18,6 +18,7 @@ public class ExaminationQuestionDTO {
     private Timestamp modifiedDate;
     private ExaminationDTO examination;
     private Integer number;
+    private String answerUser;
 
     public Integer getExaminationQuestionId() {
         return examinationQuestionId;
@@ -138,5 +139,13 @@ public class ExaminationQuestionDTO {
 
     public void setNumber(Integer number) {
         this.number = number;
+    }
+
+    public String getAnswerUser() {
+        return answerUser;
+    }
+
+    public void setAnswerUser(String answerUser) {
+        this.answerUser = answerUser;
     }
 }
