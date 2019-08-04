@@ -16,17 +16,12 @@
     <!-- START COUNTDOWN -->
     <script type="text/javascript">
         function doneHandler(result) {
-            /*var year = result.getFullYear();
-            var month = result.getMonth() + 1; // bump by 1 for humans
-            var day = result.getDate();*/
             var h = result.getHours();
             var m = result.getMinutes();
             var s = result.getSeconds();
             var UTC = result.toString();
             var output = UTC + "\n";
-            /*output += "year: " + year + "\n";
-            output += "month: " + month + "\n";
-            output += "day: " + day + "\n";*/
+
             output += "h: " + h + "\n";
             output += "m: " + m + "\n";
             output += "s: " + s + "\n";

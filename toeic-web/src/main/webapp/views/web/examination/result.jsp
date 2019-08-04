@@ -49,28 +49,32 @@
                 </c:choose>
                 <c:if test="${empty item.paragraph}">
                     <p>
+                            ${item.option1}
                         <c:if test="${item.correctAnswer == 'A'}">
                             <img src="<c:url value="/template/image/correct.png"/>">
                         </c:if>
-                            ${item.option1}
+
                     </p>
                     <p>
+                            ${item.option2}
                         <c:if test="${item.correctAnswer == 'B'}">
                             <img src="<c:url value="/template/image/correct.png"/>">
                         </c:if>
-                            ${item.option2}
+
                     </p>
                     <p>
+                            ${item.option3}
                         <c:if test="${item.correctAnswer == 'C'}">
                             <img src="<c:url value="/template/image/correct.png"/>">
                         </c:if>
-                            ${item.option3}
+
                     </p>
                     <p>
+                            ${item.option4}
                         <c:if test="${item.correctAnswer == 'D'}">
                             <img src="<c:url value="/template/image/correct.png"/>">
                         </c:if>
-                            ${item.option4}
+
                     </p>
                 </c:if>
             </c:forEach>
