@@ -48,9 +48,7 @@ public class ExerciseQuestionController extends HttpServlet {
         Object[] objects = SingletonServiceUtil.getExerciseQuestionServiceInstance()
                 .findExerciseQuestionByProperties(properties, command.getSortExpression(), command.getSortDirection(),
                         command.getFirstItem(), command.getMaxPageItems());
-//        if (objects[1] instanceof ExerciseQuestionDTO) {
             command.setListResult((List<ExerciseQuestionDTO>) objects[1]);
-//        }
         command.setTotalItems(Integer.parseInt(objects[0].toString()));
         command.setTotalPages((int) Math.ceil((double) command.getTotalItems() / command.getMaxPageItems()));
     }

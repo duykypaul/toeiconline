@@ -35,8 +35,13 @@
                                 <c:param name="examinationId" value="${item.examinationId}"/>
                                 <c:param name="page" value="1"/>
                             </c:url>
-                            <h4><span><a href="${detailUrl}">Làm bài thi</a></span>
-                            </h4>
+
+                            <c:if test="${not empty login_name}">
+                                <h4><span><a href="${detailUrl}">Làm bài thi</a></span></h4>
+                            </c:if>
+                            <c:if test="${empty login_name}">
+                            <h4><span><fmt:message key="label.examination.require" bundle="${lang}"/></span></h4>
+                            </c:if>
                         </div>
                     </div>
                 </c:forEach>

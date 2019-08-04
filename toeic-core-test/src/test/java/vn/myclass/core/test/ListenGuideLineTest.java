@@ -25,6 +25,6 @@ public class ListenGuideLineTest {
         Map<String, Object> property = new HashMap<String, Object>();
         property.put("title", "Bai hd 8");
         property.put("content", "Noij dung bai hd 8");
-        Object[] objects = listenGuideLineDao.findByProperty(property, null, null, null, null);
+        Object[] objects = listenGuideLineDao.findByProperty(property, null, null, null, null,null);
     }
 }

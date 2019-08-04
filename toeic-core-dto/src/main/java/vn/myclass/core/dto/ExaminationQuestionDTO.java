@@ -17,6 +17,7 @@ public class ExaminationQuestionDTO {
     private Timestamp createdDate;
     private Timestamp modifiedDate;
     private ExaminationDTO examination;
+    private Integer number;
 
     public Integer getExaminationQuestionId() {
         return examinationQuestionId;
@@ -129,5 +130,13 @@ public class ExaminationQuestionDTO {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public Integer getNumber() {
+        return number;
+    }
+
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 }

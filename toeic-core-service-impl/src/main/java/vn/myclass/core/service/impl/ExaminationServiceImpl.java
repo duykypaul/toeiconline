@@ -13,7 +13,7 @@ import java.util.Map;
 public class ExaminationServiceImpl implements ExaminationService {
     public Object[] findExaminationByProperties(Map<String, Object> property, String sortExpression, String sortDirection, int firstItem, int maxPageItems) {
         List<ExaminationDTO> result = new ArrayList<ExaminationDTO>();
-        Object[] objects = SingletonDaoUtil.getExaminationDaoInstance().findByProperty(property, sortExpression, sortDirection, firstItem, maxPageItems);
+        Object[] objects = SingletonDaoUtil.getExaminationDaoInstance().findByProperty(property, sortExpression, sortDirection, firstItem, maxPageItems, null);
         for(ExaminationEntity item: (List<ExaminationEntity>)objects[1]){
             result.add(ExaminationBeanUtil.entity2Dto(item));
         }
