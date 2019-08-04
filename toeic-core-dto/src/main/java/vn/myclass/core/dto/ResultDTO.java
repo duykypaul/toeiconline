@@ -1,34 +1,16 @@
-package vn.myclass.core.persistence.entity;
+package vn.myclass.core.dto;
 
-import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "result")
-public class ResultEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ResultDTO implements Serializable {
     private Integer resultId;
-
-    @Column(name = "listenscore")
     private Integer listenScore;
-
-    @Column(name = "readingscore")
     private Integer readingScore;
-
-    @Column(name = "createddate")
     private Timestamp createdDate;
-
-    @Column(name = "modifieddate")
     private Timestamp modifiedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "examinationid")
-    private ExaminationEntity examinationEntity;
-
-    @ManyToOne
-    @JoinColumn(name = "userid")
-    private UserEntity userEntity;
+    private ExaminationDTO examination;
+    private UserDTO user;
 
     public Integer getResultId() {
         return resultId;
@@ -70,19 +52,19 @@ public class ResultEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public ExaminationEntity getExaminationEntity() {
-        return examinationEntity;
+    public ExaminationDTO getExamination() {
+        return examination;
     }
 
-    public void setExaminationEntity(ExaminationEntity examinationEntity) {
-        this.examinationEntity = examinationEntity;
+    public void setExamination(ExaminationDTO examination) {
+        this.examination = examination;
     }
 
-    public UserEntity getUserEntity() {
-        return userEntity;
+    public UserDTO getUser() {
+        return user;
     }
 
-    public void setUserEntity(UserEntity userEntity) {
-        this.userEntity = userEntity;
+    public void setUser(UserDTO user) {
+        this.user = user;
     }
 }

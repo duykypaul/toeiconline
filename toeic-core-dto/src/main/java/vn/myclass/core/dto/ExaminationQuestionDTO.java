@@ -1,54 +1,22 @@
-package vn.myclass.core.persistence.entity;
+package vn.myclass.core.dto;
 
-import javax.persistence.*;
 import java.sql.Timestamp;
 
-@Entity
-@Table(name = "examinationquestion")
-public class ExaminationQuestionEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ExaminationQuestionDTO {
     private Integer examinationQuestionId;
-
-    @Column(name = "image")
     private String image;
-
-    @Column(name = "audio")
     private String audio;
-
-    @Column(name = "question")
     private String question;
-
-    @Column(name = "paragraph")
     private String paragraph;
-
-    @Column(name = "option1")
     private String option1;
-
-    @Column(name = "option2")
     private String option2;
-
-    @Column(name = "option3")
     private String option3;
-
-    @Column(name = "option4")
     private String option4;
-
-    @Column(name = "correctanswer")
     private String correctAnswer;
-
-    @Column(name = "type")
     private String type;
-
-    @Column(name = "createddate")
     private Timestamp createdDate;
-
-    @Column(name = "modifieddate")
     private Timestamp modifiedDate;
-
-    @ManyToOne
-    @JoinColumn(name = "examinationid")
-    private ExaminationEntity examinationEntity;
+    private ExaminationDTO examination;
 
     public Integer getExaminationQuestionId() {
         return examinationQuestionId;
@@ -80,14 +48,6 @@ public class ExaminationQuestionEntity {
 
     public void setQuestion(String question) {
         this.question = question;
-    }
-
-    public String getParagraph() {
-        return paragraph;
-    }
-
-    public void setParagraph(String paragraph) {
-        this.paragraph = paragraph;
     }
 
     public String getOption1() {
@@ -146,12 +106,21 @@ public class ExaminationQuestionEntity {
         this.modifiedDate = modifiedDate;
     }
 
-    public ExaminationEntity getExaminationEntity() {
-        return examinationEntity;
+
+    public ExaminationDTO getExamination() {
+        return examination;
     }
 
-    public void setExaminationEntity(ExaminationEntity examinationEntity) {
-        this.examinationEntity = examinationEntity;
+    public void setExamination(ExaminationDTO examination) {
+        this.examination = examination;
+    }
+
+    public String getParagraph() {
+        return paragraph;
+    }
+
+    public void setParagraph(String paragraph) {
+        this.paragraph = paragraph;
     }
 
     public String getType() {
