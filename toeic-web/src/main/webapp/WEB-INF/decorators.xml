@@ -20,6 +20,10 @@
         <pattern>/bai-tap*</pattern>
     </decorator>
 
+    <decorator name="product" page="product.jsp">
+        <pattern>/bai-thi*</pattern>
+    </decorator>
+
     <decorator name="web" page="web.jsp">
         <pattern>/*</pattern>
     </decorator>
