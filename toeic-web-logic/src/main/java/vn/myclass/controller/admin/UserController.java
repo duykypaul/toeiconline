@@ -125,7 +125,7 @@ public class UserController extends HttpServlet {
             }
             if(objects != null){
                 String urlType = null;
-                Map<String, String> mapValue = (Map<String, String>) objects[3];
+                 Map<String, String> mapValue = (Map<String, String>) objects[3];
                 for (Map.Entry<String, String> item: mapValue.entrySet()) {
                     if (item.getKey().equals("urlType")) {
                         urlType = item.getValue();
