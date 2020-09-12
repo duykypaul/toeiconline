@@ -11,56 +11,66 @@
         <div class="span12">
             <ul class="thumbnails">
                 <li class="span12">
-                    <div class="thumbnail" id="result">
+                    <div class="thumbnail" id="result" style="display: flex; flex-direction: column">
                         <br/>
                         <c:forEach items="${items.listResult}" var="item">
-                            <p>
+                            <div class="title">
                                 <b>${item.question}</b>
-                            </p>
-                            <c:if test="${item.image != null}">
-                                <p>
-                                    <img src="<c:url value="/repository/${item.image}"/>" width="300px" height="150px">
-                                </p>
-                            </c:if>
-                            <c:if test="${item.audio != null}">
-                                <p>
-                                    <audio controls>
-                                        <source src="<c:url value="/repository/${item.audio}"/>" type="audio/mpeg">
-                                    </audio>
-                                </p>
-                            </c:if>
-                            <p>
-                                <input type="radio" name="answerUser" value="A"/>
-                                    ${item.option1}
-                            </p>
-                            <p>
-                                <input type="radio" name="answerUser" value="B"/>
-                                    ${item.option2}
-                            </p>
-                            <p>
-                                <input type="radio" name="answerUser" value="C"/>
-                                    ${item.option3}
-                            </p>
-                            <p>
-                                <input type="radio" name="answerUser" value="D"/>
-                                    ${item.option4}
-                            </p>
-                            <input type="hidden" name="exerciseId" value="${item.exercise.exerciseId}" id="exerciseId"/>
-
+                            </div>
+                            <div style="display: flex; justify-content: flex-start; margin-top: 20px;">
+                                <c:if test="${item.image != null}">
+                                    <div>
+                                        <img src="<c:url value="/fileupload/${item.image}"/>" width="300px"
+                                             height="150px">
+                                    </div>
+                                </c:if>
+                                <div style="display: flex; flex-direction: column; align-items: flex-start; justify-content: space-around; margin-left: 65px;">
+                                    <c:if test="${item.audio != null}">
+                                        <div>
+                                            <audio controls>
+                                                <source src="<c:url value="/fileupload/${item.audio}"/>"
+                                                        type="audio/mpeg">
+                                            </audio>
+                                        </div>
+                                    </c:if>
+                                    <div >
+                                        <div class="radio-inline">
+                                            <input type="radio" name="answerUser" value="A"/>
+                                                ${item.option1}
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input type="radio" name="answerUser" value="B"/>
+                                                ${item.option2}
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input type="radio" name="answerUser" value="C"/>
+                                                ${item.option3}
+                                        </div>
+                                        <div class="radio-inline">
+                                            <input type="radio" name="answerUser" value="D"/>
+                                                ${item.option4}
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="exerciseId" value="${item.exercise.exerciseId}"
+                                           id="exerciseId"/>
+                                </div>
+                            </div>
                         </c:forEach>
                     </div>
                 </li>
             </ul>
         </div>
     </div>
+    <div class="row block-check-answer">
+        <input type="hidden" name="page" id="page" value="${items.page}"/>
+        <input type="button" class="btn btn-info" value="Xem đáp án" id="btnConfirm"/>
+        <input type="button" class="btn btn-info" value="Làm lại" id="btnAgain" style="margin-left: 26px;"/>
+    </div>
     <!--Pagination-->
     <div class="row">
         <div class="span12">
             <ul id="pagination-demo" class="pagination-sm"></ul>
         </div>
-        <input type="hidden" name="page" id="page" value="${items.page}"/>
-        <input type="button" class="btn btn-info" value="Xem đáp án" id="btnConfirm"/>
-        <input type="button" class="btn btn-info" value="Làm lại" id="btnAgain"/>
     </div>
 </form>
 <script>
@@ -68,7 +78,7 @@
     var startPage = ${items.page};
     $(document).ready(function () {
         $('#btnConfirm').click(function () {
-            if($('input[name=answerUser]:checked').length > 0){
+            if ($('input[name=answerUser]:checked').length > 0) {
                 $('#formUrl').submit();
             } else {
                 alert("Bạn chưa chọn đáp án");
@@ -76,7 +86,7 @@
         });
         $('#btnAgain').click(function () {
             var exerciseId = $('#exerciseId').val();
-            window.location = "/bai-tap-thuc-hanh.html?page="+startPage+"&exerciseId="+exerciseId+"";
+            window.location = "/bai-tap-thuc-hanh.html?page=" + startPage + "&exerciseId=" + exerciseId + "";
         });
     });
     $('#pagination-demo').twbsPagination({
@@ -87,7 +97,7 @@
             if (page != startPage) {
                 $('#page').val(page);
                 var exerciseId = $('#exerciseId').val();
-                window.location = "/bai-tap-thuc-hanh.html?page="+page+"&exerciseId="+exerciseId+"";
+                window.location = "/bai-tap-thuc-hanh.html?page=" + page + "&exerciseId=" + exerciseId + "";
             }
         }
     });

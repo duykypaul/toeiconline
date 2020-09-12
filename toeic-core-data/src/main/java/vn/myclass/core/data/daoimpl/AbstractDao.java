@@ -8,7 +8,6 @@ import vn.myclass.core.data.dao.GenericDao;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +24,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
     }
 
     public List<T> findAll() {
-        List<T> list = new ArrayList<T>();
+        List<T> list;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -82,8 +81,12 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
         return entity;
     }
 
+    /*
+    * @author: KyLC
+    * @return: Entity
+    * */
     public T findById(ID id) {
-        T result = null;
+        T result;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
 
@@ -104,7 +107,7 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
     }
 
     public Object[] findByProperty(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit, Integer id) {
-        List<T> list = new ArrayList<T>();
+        List<T> list;
         Session session = HibernateUtil.getSessionFactory().openSession();
         Transaction transaction = session.beginTransaction();
         Object totalItems = 0;
@@ -121,13 +124,13 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             sql.append(this.getPersistenceClassName()).append(" where 1=1 ");
 
             if(property.size() > 0) {
-                for(int i = 0; i < params.length; i++){
-                    sql.append(" and ").append("LOWER("+params[i]+") LIKE '%' || :"+params[i]+" || '%'");
+                for (String param : params) {
+                    sql.append(" and ").append("LOWER(" + param + ") LIKE '%' || :" + param + " || '%'");
                 }
             }
             if(sortExpression != null && sortDirection != null) {
                 sql.append(" order by ").append(sortExpression);
-                sql.append(" " + (sortDirection.equals(CoreConstant.SORT_ASC)? "asc" : "desc"));
+                sql.append(" ").append(sortDirection.equals(CoreConstant.SORT_ASC) ? "asc" : "desc");
             }
             Query query1 = session.createQuery(sql.toString());
             if(property.size() > 0) {
@@ -146,8 +149,8 @@ public class AbstractDao<ID extends Serializable, T> implements GenericDao<ID, T
             StringBuilder sql2 = new StringBuilder("select count(*) from ");
             sql2.append(this.getPersistenceClassName()).append(" where 1=1 ");
             if(property.size() > 0) {
-                for(int t = 0; t < params.length; t++){
-                    sql2.append(" and ").append("LOWER("+params[t]+") LIKE '%' || :"+params[t]+" || '%'");
+                for (String param : params) {
+                    sql2.append(" and ").append("LOWER(" + param + ") LIKE '%' || :" + param + " || '%'");
                 }
             }
 

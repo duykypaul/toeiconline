@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8" %>
 <c:url var="logoutUrl" value="/logout.html">
     <c:param name="action" value="logout"/>
 </c:url>
@@ -11,6 +13,7 @@
         </div>
         <div class="account_desc">
             <ul>
+                <li><strong><a href="home.html">Trang chủ</a></strong></li>
                 <c:if test="${not empty login_name}">
                     <li><a><strong>Hi, ${login_name}</strong></a></li>
                     <li><a href="${logoutUrl}"><fmt:message key="label.logout" bundle="${lang}"/></a></li>

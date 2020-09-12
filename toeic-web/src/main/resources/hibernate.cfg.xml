@@ -19,6 +19,5 @@
         <mapping class="vn.myclass.core.persistence.entity.ResultEntity"/>
         <mapping class="vn.myclass.core.persistence.entity.ExaminationQuestionEntity"/>
         <mapping class="vn.myclass.core.persistence.entity.ExerciseQuestionEntity"/>
-
     </session-factory>
 </hibernate-configuration>

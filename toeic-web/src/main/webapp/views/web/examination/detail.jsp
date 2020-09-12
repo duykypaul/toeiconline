@@ -34,7 +34,7 @@
         });
     </script>
     <!-- END COUNTDOWN -->
-    <div class="image group">
+    <div class="image group" style="margin-bottom: 50px;">
         <div class="grid news_desc">
             <div style="overflow: auto; height: 400px" >
                 <c:forEach items="${items.listResult}" var="item">
@@ -47,18 +47,18 @@
                     <c:choose>
                         <c:when test="${item.type == PHOTO}">
                             <p>
-                                <img src="<c:url value="/repository/${item.image}"/>" width="300px" height="150px">
+                                <img src="<c:url value="/fileupload/${item.image}"/>" width="300px" height="150px">
                             </p>
                             <p>
                                 <audio controls>
-                                    <source src="<c:url value="/repository/${item.audio}"/>" type="audio/mpeg">
+                                    <source src="<c:url value="/fileupload/${item.audio}"/>" type="audio/mpeg">
                                 </audio>
                             </p>
                         </c:when>
                         <c:when test="${item.type == QUESTION_RESPONSE}">
                             <p>
                                 <audio controls>
-                                    <source src="<c:url value="/repository/${item.audio}"/>" type="audio/mpeg">
+                                    <source src="<c:url value="/fileupload/${item.audio}"/>" type="audio/mpeg">
                                 </audio>
                             </p>
                         </c:when>

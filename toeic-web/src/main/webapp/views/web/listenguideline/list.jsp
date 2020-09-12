@@ -30,7 +30,8 @@
                 <c:forEach var="item" items="${items.listResult}">
                     <div class="image group">
                         <div class="grid images_3_of_1">
-                            <img src="<c:url value="/repository/${item.image}"/>" alt=""/>
+<%--                            <img src="<c:url value="/repository/${item.image}"/>" alt=""/>--%>
+                            <img src="<c:url value="/fileupload/${item.image}"/>" alt=""/>
                         </div>
                         <div class="grid news_desc">
                             <h3>${item.title}</h3>
@@ -51,7 +52,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         var totalPages = ${items.totalPages};
-        var startPage = ${items.page};
+        var startPage = ${items.page}; 
         var visiblePages = ${items.maxPageItems};
         $('#pagination').twbsPagination({
             totalPages: totalPages,

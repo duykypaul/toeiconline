@@ -36,6 +36,7 @@ public class RoleTest {
     public void checkRoleFindById(){
         RoleDao roleDao = new RoleDaoImpl();
         RoleEntity roleEntity = roleDao.findById(1);
+
     }
 
     @Test
