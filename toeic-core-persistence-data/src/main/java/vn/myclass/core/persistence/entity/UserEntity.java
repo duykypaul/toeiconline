@@ -61,16 +61,16 @@ public class UserEntity {
         return fullName;
     }
 
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
     public List<CommentEntity> getCommentEntityList() {
         return commentEntityList;
     }
 
     public void setCommentEntityList(List<CommentEntity> commentEntityList) {
         this.commentEntityList = commentEntityList;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
     }
 
     public Timestamp getCreatedDate() {

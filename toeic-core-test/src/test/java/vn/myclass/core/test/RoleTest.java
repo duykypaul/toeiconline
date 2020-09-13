@@ -10,12 +10,13 @@ import java.util.List;
 
 public class RoleTest {
     @Test
-    public void checkFindAll(){
+    public void checkFindAll() {
         RoleDao roleDao = new RoleDaoImpl();
         List<RoleEntity> list = roleDao.findAll();
     }
+
     @Test
-    public void checkUpdateRole(){
+    public void checkUpdateRole() {
         RoleDao roleDao = new RoleDaoImpl();
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setRoleId(2);
@@ -24,7 +25,7 @@ public class RoleTest {
     }
 
     @Test
-    public void checkSaveRole(){
+    public void checkSaveRole() {
         RoleDao roleDao = new RoleDaoImpl();
         RoleEntity roleEntity = new RoleEntity();
         roleEntity.setRoleId(1);
@@ -33,14 +34,14 @@ public class RoleTest {
     }
 
     @Test
-    public void checkRoleFindById(){
+    public void checkRoleFindById() {
         RoleDao roleDao = new RoleDaoImpl();
         RoleEntity roleEntity = roleDao.findById(1);
 
     }
 
     @Test
-    public void checkRoleFindByProperty(){
+    public void checkRoleFindByProperty() {
         RoleDao roleDao = new RoleDaoImpl();
         String property = null;
         Object value = null;
@@ -52,7 +53,7 @@ public class RoleTest {
     }
 
     @Test
-    public void checkRoleDelete(){
+    public void checkRoleDelete() {
         RoleDao roleDao = new RoleDaoImpl();
         List<Integer> listId = new ArrayList<Integer>();
         listId.add(1);

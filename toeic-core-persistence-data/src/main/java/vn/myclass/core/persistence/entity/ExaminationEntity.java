@@ -19,17 +19,14 @@ public class ExaminationEntity {
 
     @Column(name = "modifieddate")
     private Timestamp modifiedDate;
-
+    @OneToMany(mappedBy = "examinationEntity", fetch = FetchType.LAZY)
+    private List<ExaminationQuestionEntity> examinationQuestionEntityList;
+    @OneToMany(mappedBy = "examinationEntity", fetch = FetchType.LAZY)
+    private List<ResultEntity> resultEntityList;
 
     public Integer getExaminationId() {
         return examinationId;
     }
-
-    @OneToMany(mappedBy = "examinationEntity", fetch = FetchType.LAZY)
-    private List<ExaminationQuestionEntity> examinationQuestionEntityList;
-
-    @OneToMany(mappedBy = "examinationEntity", fetch = FetchType.LAZY)
-    private List<ResultEntity> resultEntityList;
 
     public void setExaminationId(Integer examinationId) {
         this.examinationId = examinationId;

@@ -18,11 +18,11 @@ import java.util.Set;
 
 public class UploadUtil {
     private final Logger log = Logger.getLogger(this.getClass());
-    private final int maxMemorySize = 1024 *1024 * 3; /* 3MB */
-    private final int maxRequestSize = 1024 *1024 * 50; /* 50MB */
+    private final int maxMemorySize = 1024 * 1024 * 3; /* 3MB */
+    private final int maxRequestSize = 1024 * 1024 * 50; /* 50MB */
 
     public Object[] writeOrUpdateFile(HttpServletRequest request, Set<String> titleValue, String path) {
-        String address = "/"+ CoreConstant.FOLDER_UPLOAD;
+        String address = "/" + CoreConstant.FOLDER_UPLOAD;
         checkAndCreateFolder(address, path);
         boolean check = true;
         String fileLocation = null;
@@ -30,7 +30,7 @@ public class UploadUtil {
         Map<String, String> mapReturnValue = new HashMap<String, String>();
         // Check that we have a file upload request
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-        if(!isMultipart) {
+        if (!isMultipart) {
             System.out.println("have not enctype multipart/form-data");
             check = false;
         }
@@ -51,29 +51,29 @@ public class UploadUtil {
         try {
             // Parse the request
             List<FileItem> items = upload.parseRequest(request);
-            for(FileItem item: items){
-                if(!item.isFormField()){
+            for (FileItem item : items) {
+                if (!item.isFormField()) {
                     fileName = item.getName();
-                    if(StringUtils.isNotBlank(fileName)){
+                    if (StringUtils.isNotBlank(fileName)) {
                         fileLocation = address + File.separator + path + File.separator + fileName;
                         File uploadFile = new File(fileLocation);
 
                         boolean isExist = uploadFile.exists();
-                        try{
-                            if(isExist) {
+                        try {
+                            if (isExist) {
                                 uploadFile.delete();
                                 item.write(uploadFile);
                             } else {
                                 item.write(uploadFile);
                             }
-                        } catch (Exception e){
+                        } catch (Exception e) {
                             check = false;
                             log.error(e.getMessage(), e);
                         }
 
                     }
                 } else {
-                    if(titleValue != null){
+                    if (titleValue != null) {
                         String fieldName = item.getFieldName();
                         String fieldValue = null;
                         try {
@@ -81,31 +81,31 @@ public class UploadUtil {
                         } catch (UnsupportedEncodingException e) {
                             log.error(e.getMessage(), e);
                         }
-                        if(titleValue.contains(fieldName)){
+                        if (titleValue.contains(fieldName)) {
                             mapReturnValue.put(fieldName, fieldValue);
                         }
                     }
                 }
             }
-        } catch(FileUploadException e){
+        } catch (FileUploadException e) {
             check = false;
             log.error(e.getMessage(), e);
         }
 
         String name = "";
-        if(StringUtils.isNotBlank(fileName)){
+        if (StringUtils.isNotBlank(fileName)) {
             name = path + File.separator + fileName;
         }
-        return new Object[]{check, fileLocation, name , mapReturnValue};
+        return new Object[]{check, fileLocation, name, mapReturnValue};
     }
 
     private void checkAndCreateFolder(String address, String path) {
         File folderRoot = new File(address);
-        if(!folderRoot.exists()) {
+        if (!folderRoot.exists()) {
             folderRoot.mkdirs();
         }
         File folderChild = new File(address + File.separator + path);
-        if(!folderChild.exists()) {
+        if (!folderChild.exists()) {
             folderChild.mkdirs();
         }
     }

@@ -21,6 +21,7 @@ public class ExaminationQuestionBeanUtil {
         dto.setParagraph(entity.getParagraph());
         return dto;
     }
+
     public static ExaminationQuestionEntity dto2Entity(ExaminationQuestionDTO dto) {
         ExaminationQuestionEntity entity = new ExaminationQuestionEntity();
         entity.setExaminationQuestionId(dto.getExaminationQuestionId());

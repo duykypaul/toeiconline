@@ -31,16 +31,16 @@ public class ListenGuideLineController extends HttpServlet {
         if (command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_LIST)) {
             if (command.getCrudaction() != null && command.getCrudaction().equals(WebConstant.REDIRECT_DELETE)) {
                 List<Integer> ids = new ArrayList<Integer>();
-                for (String item : command.getCheckList()){
+                for (String item : command.getCheckList()) {
                     ids.add(Integer.parseInt(item));
                 }
                 Integer result = SingletonServiceUtil.getListenGuidelineServiceInstance().deleteListenGuideLines(ids);
-                if(result != ids.size()){
+                if (result != ids.size()) {
                     command.setCrudaction(WebConstant.REDIRECT_ERROR);
                 }
             }
             excuteSearchListenguideLine(request, command);
-            if(command.getCrudaction() != null){
+            if (command.getCrudaction() != null) {
                 Map<String, String> mapMessage = buildMapRedirectMessage(resourceBundle);
                 WebCommonUtil.addRedirectMessage(request, command.getCrudaction(), mapMessage);
             }
@@ -48,7 +48,7 @@ public class ListenGuideLineController extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/listenguideline/list.jsp");
             rd.forward(request, response);
         } else if (command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_EDIT)) {
-            if(command.getPojo() != null && command.getPojo().getListenGuideLineId() != null){
+            if (command.getPojo() != null && command.getPojo().getListenGuideLineId() != null) {
                 command.setPojo(SingletonServiceUtil.getListenGuidelineServiceInstance()
                         .findListenGuideLineById("listenGuideLineId", command.getPojo().getListenGuideLineId()));
             }
@@ -71,15 +71,15 @@ public class ListenGuideLineController extends HttpServlet {
         Map<String, Object> property = buildMapProperties(command);
         RequestUtil.initSearchBean(request, command);
         Object[] objects = SingletonServiceUtil.getListenGuidelineServiceInstance()
-                                        .findListenGuideLineByProperties(property, command.getSortExpression(),
-                                                                command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
+                .findListenGuideLineByProperties(property, command.getSortExpression(),
+                        command.getSortDirection(), command.getFirstItem(), command.getMaxPageItems());
         command.setListResult((List<ListenGuideLineDTO>) objects[1]);
         command.setTotalItems(Integer.parseInt(objects[0].toString()));
     }
 
     private Map<String, Object> buildMapProperties(ListenGuideLineCommand command) {
         Map<String, Object> property = new HashMap<String, Object>();
-        if(StringUtils.isNotBlank(command.getPojo().getTitle())){
+        if (StringUtils.isNotBlank(command.getPojo().getTitle())) {
             property.put("title", command.getPojo().getTitle());
         }
         return property;
@@ -94,27 +94,27 @@ public class ListenGuideLineController extends HttpServlet {
         Object[] objects = uploadUtil.writeOrUpdateFile(request, titleValue, WebConstant.LISTENGUIDELINE);
 
         boolean checkStatusUploadImage = (Boolean) objects[0];
-        if(!checkStatusUploadImage){
+        if (!checkStatusUploadImage) {
             response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
         } else {
             ListenGuideLineDTO dto = command.getPojo();
-            if(StringUtils.isNotBlank(objects[2].toString())){
+            if (StringUtils.isNotBlank(objects[2].toString())) {
                 dto.setImage(objects[2].toString());
             }
             Map<String, String> mapReturnValue = (Map<String, String>) objects[3];
             dto = returnValueOfDTO(dto, mapReturnValue);
 
-            if(dto != null) {
+            if (dto != null) {
                 if (dto.getListenGuideLineId() != null) {
                     /*update*/
                     ListenGuideLineDTO listenGuideLineDTO = SingletonServiceUtil.getListenGuidelineServiceInstance()
                             .findListenGuideLineById("listenGuideLineId", dto.getListenGuideLineId());
-                    if(dto.getImage() ==  null) {
+                    if (dto.getImage() == null) {
                         dto.setImage(listenGuideLineDTO.getImage());
                     }
                     dto.setCreatedDate(listenGuideLineDTO.getCreatedDate());
                     ListenGuideLineDTO result = SingletonServiceUtil.getListenGuidelineServiceInstance().updateListenGuideline(dto);
-                    if(result != null){
+                    if (result != null) {
                         response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_update");
                     } else {
                         response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
@@ -124,7 +124,7 @@ public class ListenGuideLineController extends HttpServlet {
                     try {
                         SingletonServiceUtil.getListenGuidelineServiceInstance().saveListenGuideLineDTO(dto);
                         response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_insert");
-                    } catch (ConstraintViolationException e){
+                    } catch (ConstraintViolationException e) {
                         log.error(e.getMessage(), e);
                         response.sendRedirect("/admin-guideline-listen-list.html?urlType=url_list&crudaction=redirect_error");
                     }
@@ -135,12 +135,12 @@ public class ListenGuideLineController extends HttpServlet {
     }
 
     private ListenGuideLineDTO returnValueOfDTO(ListenGuideLineDTO dto, Map<String, String> mapReturnValue) {
-        for(Map.Entry<String, String> item : mapReturnValue.entrySet()){
-            if(item.getKey().equals("pojo.title")){
+        for (Map.Entry<String, String> item : mapReturnValue.entrySet()) {
+            if (item.getKey().equals("pojo.title")) {
                 dto.setTitle(item.getValue());
-            } else if(item.getKey().equals("pojo.content")) {
+            } else if (item.getKey().equals("pojo.content")) {
                 dto.setContent(item.getValue());
-            } else if(item.getKey().equals("pojo.listenGuideLineId")) {
+            } else if (item.getKey().equals("pojo.listenGuideLineId")) {
                 dto.setListenGuideLineId(Integer.parseInt(item.getValue()));
             }
         }

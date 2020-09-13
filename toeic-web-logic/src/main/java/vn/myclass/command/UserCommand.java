@@ -9,12 +9,13 @@ import java.util.List;
 
 public class UserCommand extends AbstractCommand<UserDTO> {
 
-    public UserCommand(){
-        this.pojo = new UserDTO();
-    }
     private Integer roleId;
     private List<RoleDTO> roleDTOS;
     private List<UserImportDTO> userImportDTOS;
+    public UserCommand() {
+        this.pojo = new UserDTO();
+    }
+
     public List<RoleDTO> getRoleDTOS() {
         return roleDTOS;
     }

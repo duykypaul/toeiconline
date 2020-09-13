@@ -5,7 +5,7 @@ import vn.myclass.core.web.command.AbstractCommand;
 
 public class ExerciseCommand extends AbstractCommand<ExerciseDTO> {
 
-    public ExerciseCommand(){
+    public ExerciseCommand() {
         this.pojo = new ExerciseDTO();
     }
 

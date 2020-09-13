@@ -14,6 +14,7 @@ public class ResultBeanUtil {
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
     }
+
     public static ResultEntity dto2Entity(ResultDTO dto) {
         ResultEntity entity = new ResultEntity();
         entity.setResultId(dto.getResultId());

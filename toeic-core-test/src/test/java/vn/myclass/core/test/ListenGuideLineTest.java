@@ -10,21 +10,23 @@ import java.util.Map;
 
 public class ListenGuideLineTest {
     ListenGuideLineDao listenGuideLineDao;
+
     @BeforeTest
-    public void initData(){
+    public void initData() {
         listenGuideLineDao = new ListenGuideLineDaoImpl();
     }
+
     @Test
-    public void checkRoleFindByProperty(){
+    public void checkRoleFindByProperty() {
 //        ListenGuideLineDao listenGuideLineDao = new ListenGuideLineDaoImpl();
 //        Object[] objects = listenGuideLineDao.findByProperty(null, null, null, null, 4, 2);
     }
 
     @Test
-    public void checkApiFindBuProperty(){
+    public void checkApiFindBuProperty() {
         Map<String, Object> property = new HashMap<String, Object>();
         property.put("title", "Bai hd 8");
         property.put("content", "Noij dung bai hd 8");
-        Object[] objects = listenGuideLineDao.findByProperty(property, null, null, null, null,null);
+        Object[] objects = listenGuideLineDao.findByProperty(property, null, null, null, null, null);
     }
 }

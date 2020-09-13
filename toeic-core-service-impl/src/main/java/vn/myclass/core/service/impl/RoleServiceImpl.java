@@ -13,7 +13,7 @@ public class RoleServiceImpl implements RoleService {
     public List<RoleDTO> findAll() {
         List<RoleEntity> roleEntities = SingletonDaoUtil.getRoleDaoInstance().findAll();
         List<RoleDTO> dtos = new ArrayList<RoleDTO>();
-        for(RoleEntity item : roleEntities) {
+        for (RoleEntity item : roleEntities) {
             dtos.add(RoleBeanUtil.entity2Dto(item));
         }
         return dtos;

@@ -14,6 +14,7 @@ public class ExaminationBeanUtil {
         dto.setModifiedDate(entity.getModifiedDate());
         return dto;
     }
+
     public static ExaminationEntity dto2Entity(ExaminationDTO dto) {
         ExaminationEntity entity = new ExaminationEntity();
         entity.setExaminationId(dto.getExaminationId());

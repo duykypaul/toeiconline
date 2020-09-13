@@ -52,7 +52,7 @@ public class ListenGuideLineController extends HttpServlet {
 
     private Map<String, Object> buildMapProperties(ListenGuideLineCommand command) {
         Map<String, Object> property = new HashMap<String, Object>();
-        if(StringUtils.isNotBlank(command.getPojo().getTitle())){
+        if (StringUtils.isNotBlank(command.getPojo().getTitle())) {
             property.put("title", command.getPojo().getTitle());
         }
         return property;

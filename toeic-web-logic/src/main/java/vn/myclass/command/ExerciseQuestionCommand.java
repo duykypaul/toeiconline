@@ -5,13 +5,12 @@ import vn.myclass.core.web.command.AbstractCommand;
 
 public class ExerciseQuestionCommand extends AbstractCommand<ExerciseQuestionDTO> {
 
-    public ExerciseQuestionCommand(){
-        this.pojo = new ExerciseQuestionDTO();
-    }
-
     private Integer exerciseId;
     private String answerUser;
     private boolean checkAnswer;
+    public ExerciseQuestionCommand() {
+        this.pojo = new ExerciseQuestionDTO();
+    }
 
     public Integer getExerciseId() {
         return exerciseId;

@@ -31,7 +31,7 @@ public class ExerciseQuestionController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ExerciseQuestionCommand command = FormUtil.populate(ExerciseQuestionCommand.class, request);
         getListenExerciseQuestion(command);
-        for (ExerciseQuestionDTO item: command.getListResult()) {
+        for (ExerciseQuestionDTO item : command.getListResult()) {
             if (!command.getAnswerUser().equals(item.getCorrectAnswer())) {
                 command.setCheckAnswer(true);
             }
@@ -48,13 +48,13 @@ public class ExerciseQuestionController extends HttpServlet {
         Object[] objects = SingletonServiceUtil.getExerciseQuestionServiceInstance()
                 .findExerciseQuestionByProperties(properties, command.getSortExpression(), command.getSortDirection(),
                         command.getFirstItem(), command.getMaxPageItems());
-            command.setListResult((List<ExerciseQuestionDTO>) objects[1]);
+        command.setListResult((List<ExerciseQuestionDTO>) objects[1]);
         command.setTotalItems(Integer.parseInt(objects[0].toString()));
         command.setTotalPages((int) Math.ceil((double) command.getTotalItems() / command.getMaxPageItems()));
     }
 
-    private Map<String,Object> buildMap(ExerciseQuestionCommand command) {
-        Map<String,Object> result = new HashMap<String, Object>();
+    private Map<String, Object> buildMap(ExerciseQuestionCommand command) {
+        Map<String, Object> result = new HashMap<String, Object>();
         if (command.getExerciseId() != null) {
             result.put("exerciseId", command.getExerciseId());
         }

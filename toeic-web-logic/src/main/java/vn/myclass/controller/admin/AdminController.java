@@ -17,10 +17,10 @@ import java.io.IOException;
 public class AdminController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         Object user = SessionUtil.getInstance().getValue(request, WebConstant.LOGIN_NAME);
-        if(user != null) {
-            UserDTO userDTO =  SingletonServiceUtil.getUserServiceInstance().findUserByUserName((String) user);
+        if (user != null) {
+            UserDTO userDTO = SingletonServiceUtil.getUserServiceInstance().findUserByUserName((String) user);
             String requestDispatcher = "";
-            if(userDTO.getRoleDTO().getName().equals(WebConstant.ROLE_ADMIN)) {
+            if (userDTO.getRoleDTO().getName().equals(WebConstant.ROLE_ADMIN)) {
                 requestDispatcher = "/views/admin/home.jsp";
                 RequestDispatcher rd = request.getRequestDispatcher(requestDispatcher);
                 rd.forward(request, response);

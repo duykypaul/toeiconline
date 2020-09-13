@@ -42,10 +42,10 @@ public class ExerciseController extends HttpServlet {
 
     private Map<String, Object> buildMapProperties(ExerciseCommand command) {
         Map<String, Object> property = new HashMap<String, Object>();
-        if(StringUtils.isNotBlank(command.getPojo().getName())){
+        if (StringUtils.isNotBlank(command.getPojo().getName())) {
             property.put("name", command.getPojo().getName());
         }
-        if(command.getPojo().getType() != null){
+        if (command.getPojo().getType() != null) {
             property.put("type", command.getPojo().getType());
         }
         return property;

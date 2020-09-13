@@ -40,28 +40,29 @@ public class UserController extends HttpServlet {
     private final String SHOW_IMPORT_USER = "show_import_user";
     private final String READ_EXCEL = "read_excel";
     private final String VALIDATE_IPMPORT = "validate_import";
-    private final String LIST_USER_IMPORT= "list_user_import";
-    private final String IMPORT_DATA= "import_data";
+    private final String LIST_USER_IMPORT = "list_user_import";
+    private final String IMPORT_DATA = "import_data";
     ResourceBundle bundle = ResourceBundle.getBundle("ApplicationResources");
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         UserCommand command = FormUtil.populate(UserCommand.class, request);
         UserDTO pojo = command.getPojo();
 
-        if(command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_LIST)) {
+        if (command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_LIST)) {
             if (command.getCrudaction() != null && command.getCrudaction().equals(WebConstant.REDIRECT_DELETE)) {
                 List<Integer> ids = new ArrayList<Integer>();
-                for (String item : command.getCheckList()){
+                for (String item : command.getCheckList()) {
                     ids.add(Integer.parseInt(item));
                 }
                 Integer result = SingletonServiceUtil.getUserServiceInstance().deleteUsers(ids);
 
-                if(result != ids.size()){
+                if (result != ids.size()) {
                     command.setCrudaction(WebConstant.REDIRECT_ERROR);
                 }
             }
             excuteSearchUser(request, command);
 
-            if(command.getCrudaction() != null){
+            if (command.getCrudaction() != null) {
                 Map<String, String> mapMessage = buildMapRedirectMessage(bundle);
                 WebCommonUtil.addRedirectMessage(request, command.getCrudaction(), mapMessage);
             }
@@ -69,18 +70,18 @@ public class UserController extends HttpServlet {
             request.setAttribute(WebConstant.LIST_ITEMS, command);
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/list.jsp");
             rd.forward(request, response);
-        } else if(command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_EDIT)) {
-            if(pojo != null && pojo.getUserId() != null){
+        } else if (command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_EDIT)) {
+            if (pojo != null && pojo.getUserId() != null) {
                 command.setPojo(SingletonServiceUtil.getUserServiceInstance().findUserById(pojo.getUserId()));
             }
             command.setRoleDTOS(SingletonServiceUtil.getRoleServiceInstance().findAll());
             request.setAttribute(WebConstant.FORM_ITEM, command);
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/edit.jsp");
             rd.forward(request, response);
-        } else if(command.getUrlType() != null && command.getUrlType().equals(SHOW_IMPORT_USER)) {
+        } else if (command.getUrlType() != null && command.getUrlType().equals(SHOW_IMPORT_USER)) {
             RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/importuser.jsp");
             rd.forward(request, response);
-        } else if(command.getUrlType() != null && command.getUrlType().equals(VALIDATE_IPMPORT)) {
+        } else if (command.getUrlType() != null && command.getUrlType().equals(VALIDATE_IPMPORT)) {
             List<UserImportDTO> userImportDTOS = (List<UserImportDTO>) SessionUtil.getInstance().getValue(request, LIST_USER_IMPORT);
             command.setUserImportDTOS(returnListUserImport(command, userImportDTOS, request));
             request.setAttribute(WebConstant.LIST_ITEMS, command);
@@ -104,18 +105,18 @@ public class UserController extends HttpServlet {
         Set<String> value = new HashSet<String>();
         value.add("urlType");
         Object[] objects = uploadUtil.writeOrUpdateFile(request, value, "excel");
-        try{
+        try {
             UserCommand command = FormUtil.populate(UserCommand.class, request);
             UserDTO pojo = command.getPojo();
-            if(command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_EDIT)) {
-                if(command.getCrudaction() != null && command.getCrudaction().equals(WebConstant.INSERT_UPDATE)) {
+            if (command.getUrlType() != null && command.getUrlType().equals(WebConstant.URL_EDIT)) {
+                if (command.getCrudaction() != null && command.getCrudaction().equals(WebConstant.INSERT_UPDATE)) {
                     RoleDTO roleDTO = new RoleDTO();
                     roleDTO.setRoleId(command.getRoleId());
                     pojo.setRoleDTO(roleDTO);
-                    if(pojo != null && pojo.getUserId() != null){
+                    if (pojo != null && pojo.getUserId() != null) {
                         pojo = SingletonServiceUtil.getUserServiceInstance().updateUser(pojo);
                         request.setAttribute(WebConstant.MESSAGE_RESPONSE, WebConstant.REDIRECT_UPDATE);
-                    } else  {
+                    } else {
                         SingletonServiceUtil.getUserServiceInstance().saveUser(pojo);
                         request.setAttribute(WebConstant.MESSAGE_RESPONSE, WebConstant.REDIRECT_INSERT);
                     }
@@ -123,10 +124,10 @@ public class UserController extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/views/admin/user/edit.jsp");
                 rd.forward(request, response);
             }
-            if(objects != null){
+            if (objects != null) {
                 String urlType = null;
-                 Map<String, String> mapValue = (Map<String, String>) objects[3];
-                for (Map.Entry<String, String> item: mapValue.entrySet()) {
+                Map<String, String> mapValue = (Map<String, String>) objects[3];
+                for (Map.Entry<String, String> item : mapValue.entrySet()) {
                     if (item.getKey().equals("urlType")) {
                         urlType = item.getValue();
                     }
@@ -140,13 +141,13 @@ public class UserController extends HttpServlet {
                     response.sendRedirect("/admin-user-import-validate.html?urlType=validate_import");
                 }
             }
-            if(command.getUrlType() != null && command.getUrlType().equals(IMPORT_DATA)){
+            if (command.getUrlType() != null && command.getUrlType().equals(IMPORT_DATA)) {
                 List<UserImportDTO> userImportDTOS = (List<UserImportDTO>) SessionUtil.getInstance().getValue(request, LIST_USER_IMPORT);
                 SingletonServiceUtil.getUserServiceInstance().saveUserImport(userImportDTOS);
                 SessionUtil.getInstance().removeValue(request, LIST_USER_IMPORT);
                 response.sendRedirect("/admin-user-list.html?urlType=url_list");
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error(e.getMessage(), e);
             request.setAttribute(WebConstant.MESSAGE_RESPONSE, WebConstant.REDIRECT_ERROR);
         }
@@ -173,7 +174,7 @@ public class UserController extends HttpServlet {
 
     private void validateData(List<UserImportDTO> excelValues) {
         Set<String> stringSet = new HashSet<String>();
-        for(UserImportDTO item: excelValues) {
+        for (UserImportDTO item : excelValues) {
             validateRequiredField(item);
             validateDuplicate(item, stringSet);
         }
@@ -181,7 +182,7 @@ public class UserController extends HttpServlet {
     }
 
     private void validateDuplicate(UserImportDTO item, Set<String> stringSet) {
-        String message = (item.getError() == null)? "" : item.getError();
+        String message = (item.getError() == null) ? "" : item.getError();
         if (!stringSet.contains(item.getUserName())) {
             stringSet.add(item.getUserName());
         } else {
@@ -233,16 +234,16 @@ public class UserController extends HttpServlet {
         return mapMessage;
     }
 
-    private List<UserImportDTO> getValueFromExcel(String fileName, String fileLocation) throws IOException{
+    private List<UserImportDTO> getValueFromExcel(String fileName, String fileLocation) throws IOException {
         Workbook workbook = ExcelPoiUtil.getWorkBook(fileName, fileLocation);
         Sheet sheet = workbook.getSheetAt(0);
         List<UserImportDTO> excelValues = new ArrayList<UserImportDTO>();
-        for (int i=1; i <= sheet.getLastRowNum(); i++) {
+        for (int i = 1; i <= sheet.getLastRowNum(); i++) {
             Row row = sheet.getRow(i);
             UserImportDTO userImportDTO = readDataFromExcel(row);
             excelValues.add(userImportDTO);
         }
-        return  excelValues;
+        return excelValues;
     }
 
     private UserImportDTO readDataFromExcel(Row row) {

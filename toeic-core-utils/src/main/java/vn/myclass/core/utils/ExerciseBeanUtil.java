@@ -13,6 +13,7 @@ public class ExerciseBeanUtil {
         dto.setModifiedDate(entity.getModifiedDate());
         return dto;
     }
+
     public static ExerciseEntity dto2Entity(ExerciseDTO dto) {
         ExerciseEntity entity = new ExerciseEntity();
         entity.setExerciseId(dto.getExerciseId());

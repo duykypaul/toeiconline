@@ -19,10 +19,10 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     public CheckLoginDTO checkLogin(String name, String password) {
         CheckLoginDTO checkLoginDTO = new CheckLoginDTO();
-        if(name != null && password != null){
+        if (name != null && password != null) {
             Object[] objects = SingletonDaoUtil.getUserDaoInstance().checkLogin(name, password);
             checkLoginDTO.setUserExist((Boolean) objects[0]);
-            if(checkLoginDTO.isUserExist()){
+            if (checkLoginDTO.isUserExist()) {
                 checkLoginDTO.setRoleName(objects[1].toString());
             }
         }
@@ -42,8 +42,8 @@ public class UserServiceImpl implements UserService {
 
     public Object[] findUserByProperties(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
         List<UserDTO> result = new ArrayList<UserDTO>();
-        Object[] objects = SingletonDaoUtil.getUserDaoInstance().findByProperty( property, sortExpression, sortDirection, offset, limit, null);
-        for(UserEntity item: (List<UserEntity>)objects[1]){
+        Object[] objects = SingletonDaoUtil.getUserDaoInstance().findByProperty(property, sortExpression, sortDirection, offset, limit, null);
+        for (UserEntity item : (List<UserEntity>) objects[1]) {
             result.add(UserBeanUtil.entity2Dto(item));
         }
         objects[1] = result;
@@ -67,10 +67,10 @@ public class UserServiceImpl implements UserService {
         List<String> names = new ArrayList<String>();
         List<String> roles = new ArrayList<String>();
 
-        for(UserImportDTO item : userImportDTOS){
-            if(item.isValid()){
+        for (UserImportDTO item : userImportDTOS) {
+            if (item.isValid()) {
                 names.add(item.getUserName());
-                if(!roles.contains(item.getRoleName())){
+                if (!roles.contains(item.getRoleName())) {
                     roles.add(item.getRoleName());
                 }
             }
@@ -79,24 +79,24 @@ public class UserServiceImpl implements UserService {
         Map<String, UserEntity> userEntityMap = new HashMap<String, UserEntity>();
         Map<String, RoleEntity> roleEntityMap = new HashMap<String, RoleEntity>();
 
-        if(names.size() > 0) {
+        if (names.size() > 0) {
             List<UserEntity> userEntities = SingletonDaoUtil.getUserDaoInstance().findByUsers(names);
-            for(UserEntity item : userEntities){
+            for (UserEntity item : userEntities) {
                 userEntityMap.put(item.getName().toUpperCase(), item);
             }
         }
         if (roles.size() > 0) {
             List<RoleEntity> roleEntities = SingletonDaoUtil.getRoleDaoInstance().findByRoles(roles);
-            for (RoleEntity item: roleEntities) {
+            for (RoleEntity item : roleEntities) {
                 roleEntityMap.put(item.getName().toUpperCase(), item);
             }
         }
 
-        for(UserImportDTO item : userImportDTOS) {
-            String message = (item.getError() == null)? "" : item.getError();
-            if(item.isValid()) {
+        for (UserImportDTO item : userImportDTOS) {
+            String message = (item.getError() == null) ? "" : item.getError();
+            if (item.isValid()) {
                 UserEntity userEntity = userEntityMap.get(item.getUserName().toUpperCase());
-                if(userEntity != null){
+                if (userEntity != null) {
                     if (StringUtils.isNotBlank(message)) {
                         message += "<br/>";
                     }
@@ -104,7 +104,7 @@ public class UserServiceImpl implements UserService {
                 }
 
                 RoleEntity roleEntity = roleEntityMap.get(item.getRoleName().toUpperCase());
-                if(roleEntity == null) {
+                if (roleEntity == null) {
                     if (StringUtils.isNotBlank(message)) {
                         message += "<br/>";
                     }
@@ -120,8 +120,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public void saveUserImport(List<UserImportDTO> userImportDTOS) {
-        for(UserImportDTO item : userImportDTOS){
-            if(item.isValid()){
+        for (UserImportDTO item : userImportDTOS) {
+            if (item.isValid()) {
                 UserEntity entity = new UserEntity();
                 entity.setName(item.getUserName());
                 entity.setPassword(item.getPassword());

@@ -43,7 +43,7 @@ public class ExaminationController extends HttpServlet {
 
     private Map<String, Object> buildMapProperties(ExaminationCommand command) {
         Map<String, Object> property = new HashMap<String, Object>();
-        if(StringUtils.isNotBlank(command.getPojo().getName())){
+        if (StringUtils.isNotBlank(command.getPojo().getName())) {
             property.put("name", command.getPojo().getName());
         }
         return property;

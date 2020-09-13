@@ -5,13 +5,12 @@ import vn.myclass.core.web.command.AbstractCommand;
 
 public class ExaminationQuestionCommand extends AbstractCommand<ExaminationQuestionDTO> {
 
-    public ExaminationQuestionCommand(){
-        this.pojo = new ExaminationQuestionDTO();
-    }
-
     private Integer examinationId;
     private Integer listenScore;
     private Integer readingScore;
+    public ExaminationQuestionCommand() {
+        this.pojo = new ExaminationQuestionDTO();
+    }
 
     public Integer getExaminationId() {
         return examinationId;

@@ -40,9 +40,9 @@ public class ExaminationQuestionController extends HttpServlet {
         Integer examinationId = Integer.parseInt(request.getParameter("examinationId"));
         command.setExaminationId(examinationId);
         getExaminationQuestion(command);
-        for(ExaminationQuestionDTO item : command.getListResult()){
-            if(request.getParameter("answerUser["+item.getExaminationQuestionId()+"]") != null){
-                item.setAnswerUser(request.getParameter("answerUser["+item.getExaminationQuestionId()+"]"));
+        for (ExaminationQuestionDTO item : command.getListResult()) {
+            if (request.getParameter("answerUser[" + item.getExaminationQuestionId() + "]") != null) {
+                item.setAnswerUser(request.getParameter("answerUser[" + item.getExaminationQuestionId() + "]"));
             }
         }
         String userName = (String) SessionUtil.getInstance().getValue(request, WebConstant.LOGIN_NAME);

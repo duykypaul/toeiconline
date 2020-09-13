@@ -4,7 +4,7 @@ import vn.myclass.core.dto.UserDTO;
 import vn.myclass.core.persistence.entity.UserEntity;
 
 public class UserBeanUtil {
-    public static UserDTO entity2Dto(UserEntity entity){
+    public static UserDTO entity2Dto(UserEntity entity) {
         UserDTO dto = new UserDTO();
         dto.setUserId(entity.getUserId());
         dto.setName(entity.getName());
@@ -15,7 +15,7 @@ public class UserBeanUtil {
         return dto;
     }
 
-    public static UserEntity dto2Entity(UserDTO dto){
+    public static UserEntity dto2Entity(UserDTO dto) {
         UserEntity entity = new UserEntity();
         entity.setUserId(dto.getUserId());
         entity.setName(dto.getName());

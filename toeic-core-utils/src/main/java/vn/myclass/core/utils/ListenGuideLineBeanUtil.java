@@ -4,7 +4,7 @@ import vn.myclass.core.dto.ListenGuideLineDTO;
 import vn.myclass.core.persistence.entity.ListenGuideLineEntity;
 
 public class ListenGuideLineBeanUtil {
-    public static ListenGuideLineDTO entity2Dto(ListenGuideLineEntity entity){
+    public static ListenGuideLineDTO entity2Dto(ListenGuideLineEntity entity) {
         ListenGuideLineDTO dto = new ListenGuideLineDTO();
         dto.setListenGuideLineId(entity.getListenGuideLineId());
         dto.setTitle(entity.getTitle());
@@ -15,7 +15,7 @@ public class ListenGuideLineBeanUtil {
         return dto;
     }
 
-    public static ListenGuideLineEntity dto2Entity(ListenGuideLineDTO dto){
+    public static ListenGuideLineEntity dto2Entity(ListenGuideLineDTO dto) {
         ListenGuideLineEntity entity = new ListenGuideLineEntity();
         entity.setListenGuideLineId(dto.getListenGuideLineId());
         entity.setTitle(dto.getTitle());

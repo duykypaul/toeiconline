@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ResultCommand extends AbstractCommand<ResultDTO> {
 
-    public ResultCommand(){
+    public ResultCommand() {
         this.pojo = new ResultDTO();
     }
 

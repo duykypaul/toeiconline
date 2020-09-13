@@ -11,16 +11,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class ExcelPoiUtil {
-    public static Workbook getWorkBook(String fileName, String fileLocation) throws IOException{
+    public static Workbook getWorkBook(String fileName, String fileLocation) throws IOException {
         FileInputStream excelFile = new FileInputStream(new File(fileLocation));
         Workbook workbook = null;
-        if(fileName.endsWith("xls")){
+        if (fileName.endsWith("xls")) {
             workbook = new HSSFWorkbook(excelFile);
-        } else if(fileName.endsWith("xlsx")){
+        } else if (fileName.endsWith("xlsx")) {
             workbook = new XSSFWorkbook(excelFile);
         }
-        return  workbook;
+        return workbook;
     }
+
     public static String getCellValue(Cell cell) {
         String cellValue = "";
         if (cell == null) {

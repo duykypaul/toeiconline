@@ -15,7 +15,7 @@ import java.util.List;
 public class ResultServiceImpl implements ResultService {
     public ResultDTO saveResult(String userName, Integer examinationId, List<ExaminationQuestionDTO> examinationQuestions) {
         ResultDTO result = new ResultDTO();
-        if(userName != null && examinationId != null && examinationQuestions != null){
+        if (userName != null && examinationId != null && examinationQuestions != null) {
             UserEntity userEntity = SingletonDaoUtil.getUserDaoInstance().findEqualsUnique("name", userName);
             ExaminationEntity examinationEntity = SingletonDaoUtil.getExaminationDaoInstance().findById(examinationId);
             ResultEntity resultEntity = new ResultEntity();
@@ -36,10 +36,10 @@ public class ResultServiceImpl implements ResultService {
     private void calculateScores(ResultEntity resultEntity, List<ExaminationQuestionDTO> examinationQuestions) {
         Integer listenScore = 0;
         Integer readingScore = 0;
-        for (ExaminationQuestionDTO item : examinationQuestions){
-            if(item.getAnswerUser() != null){
-                if(item.getAnswerUser().equals(item.getCorrectAnswer())){
-                    if(item.getNumber() <= 4){
+        for (ExaminationQuestionDTO item : examinationQuestions) {
+            if (item.getAnswerUser() != null) {
+                if (item.getAnswerUser().equals(item.getCorrectAnswer())) {
+                    if (item.getNumber() <= 4) {
                         listenScore++;
                     } else {
                         readingScore++;

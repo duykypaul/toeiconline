@@ -20,12 +20,12 @@ public class UserDaoImpl extends AbstractDao<Integer, UserEntity> implements Use
         Transaction transaction = session.beginTransaction();
         boolean isUserExist = false;
         String roleName = null;
-        try{
+        try {
             StringBuilder sql = new StringBuilder("FROM UserEntity ue WHERE  ue.name= :name AND ue.password= :password");
             Query query = session.createQuery(sql.toString());
             query.setParameter("name", name);
             query.setParameter("password", password);
-            if(query.list().size() > 0) {
+            if (query.list().size() > 0) {
                 isUserExist = true;
                 UserEntity entity = (UserEntity) query.uniqueResult();
                 roleName = entity.getRoleEntity().getName();

@@ -16,7 +16,7 @@ public class ExaminationQuestionServiceImpl implements ExaminationQuestionServic
         List<ExaminationQuestionDTO> result = new ArrayList<ExaminationQuestionDTO>();
         Object[] objects = SingletonDaoUtil.getExaminationQuestionDaoInstance().findByProperty(property, sortExpression, sortDirection, offset, limit, examinationId);
         int count = 1;
-        for (ExaminationQuestionEntity item: (List<ExaminationQuestionEntity>)objects[1]) {
+        for (ExaminationQuestionEntity item : (List<ExaminationQuestionEntity>) objects[1]) {
             ExaminationQuestionDTO dto = ExaminationQuestionBeanUtil.entity2Dto(item);
             if (item.getParagraph() == null) {
                 dto.setNumber(count);
