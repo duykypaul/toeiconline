@@ -33,7 +33,11 @@ public class UserServiceImpl implements UserService {
         UserEntity entity = SingletonDaoUtil.getUserDaoInstance().findById(userId);
         UserDTO dto = UserBeanUtil.entity2Dto(entity);
         return dto;
+    }
 
+    public UserDTO findUserByUserName(String name) {
+        UserEntity entity = SingletonDaoUtil.getUserDaoInstance().findEqualsUnique("name", name);
+        return UserBeanUtil.entity2Dto(entity);
     }
 
     public Object[] findUserByProperties(Map<String, Object> property, String sortExpression, String sortDirection, Integer offset, Integer limit) {
